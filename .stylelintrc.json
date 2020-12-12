@@ -1,0 +1,12 @@
+{
+    "extends": "stylelint-config-htmlacademy",
+
+    "rules": {
+      "declaration-no-important": true,
+      "indentation": [2, {"ignore": ["inside-parens"]}],
+      "function-comma-space-after": "always-single-line",
+      "function-parentheses-space-inside": "never-single-line",
+      "string-quotes": "double",
+      "color-hex-case": "upper"
+    }
+  }
