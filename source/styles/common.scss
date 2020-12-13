@@ -5,14 +5,14 @@ body {
   min-height: 100vh;
   margin: 0 auto;
 
-  color: var(--color-font-dark);
+  color: var(--color-font-dark, black);
   font-family: "Montserrat", "Arial", sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 21px;
 
   cursor: default;
-  background-color: var(--color-background);
+  background-color: var(--color-background, white);
 }
 
 img {
@@ -28,6 +28,10 @@ a {
 
 a:not([href]) {
   cursor: default;
+}
+
+button {
+  cursor: pointer;
 }
 
 

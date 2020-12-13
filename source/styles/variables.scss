@@ -1,6 +1,15 @@
 $mobile: 320px;
-$desktop: 1450px;
+$desktop: 1438px;
+
+$offset: 14px;
+
+$duration: 0.5s;
 
 :root {
   --color-background: #FFFFFF;
+  --color-background-custom: #FED100;
+
+  --color-gray: #808080;
+  --color-gray-2: #675D5D;
+  --color-dark: #333333;
 }

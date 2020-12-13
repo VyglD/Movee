@@ -8,6 +8,7 @@ const htmlValidator = require(`gulp-w3c-html-validator`);
 const htmlmin = require(`gulp-htmlmin`);
 const sourcemap = require(`gulp-sourcemaps`);
 const sass = require(`gulp-sass`);
+const wait = require(`gulp-wait`);
 const postcss = require(`gulp-postcss`);
 const autoprefixer = require(`autoprefixer`);
 const csso = require(`postcss-csso`);
@@ -117,6 +118,7 @@ gulp.task(`styles`, () => {
             sourcemap.init()
         )
     )
+    .pipe(wait(200))
     .pipe(sass())
     .pipe(postcss([
       autoprefixer,
@@ -187,9 +189,11 @@ gulp.task(`refresh`, () => {
 
 gulp.task(`server`, () => {
   server.init({
-    server: {
-      baseDir: `build/`
-    }
+    server: `build/`,
+    notify: false,
+    open: true,
+    cors: true,
+    ui: false
   });
 
   gulp.watch(`source/html/*.html`).on(`all`, gulp.series(`markup`, `refresh`));

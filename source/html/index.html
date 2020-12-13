@@ -7,7 +7,38 @@
   <title>MOVEE - Перевозки</title>
 </head>
 <body>
-  <header>
+  <header class="header">
+    <img
+      class="header__logo"
+      src="img/logo.svg"
+      width="62"
+      height="20"
+      alt="MOVEE"
+    >
+    <button
+      class="header__nav-toggle header__nav-toggle--no-js"
+      type="button"
+      id="nav-toggle-js"
+    >
+      <span>Изменить видимость меню</span>
+    </button>
+    <nav class="header__nav header__nav--no-js" id="nav-js">
+      <ul class="header__nav-list list-reset">
+        <li class="header__nav-item">
+          <a href="#cost" class="header__nav-link">Цены</a>
+        </li>
+        <li class="header__nav-item">
+          <a href="#autopark" class="header__nav-link">Автопарк</a>
+        </li>
+        <li class="header__nav-item">
+          <a href="#reviews" class="header__nav-link">Отзывы</a>
+        </li>
+        <li class="header__nav-item">
+          <a href="#contacts" class="header__nav-link">Контакты</a>
+        </li>
+      </ul>
+    </nav>
+    <a class="header__telephone" href="tel:+78000801213">8(800)-080-12-13</a>
   </header>
 
   <main>
