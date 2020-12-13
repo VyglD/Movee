@@ -1,4 +1,5 @@
 $mobile: 320px;
+$tablet: 760px;
 $desktop: 1438px;
 
 $offset: 14px;
@@ -8,6 +9,7 @@ $duration: 0.5s;
 :root {
   --color-background: #FFFFFF;
   --color-background-custom: #FED100;
+  --color-background-custom-focus: #D8B61F;
 
   --color-gray: #808080;
   --color-gray-2: #675D5D;
