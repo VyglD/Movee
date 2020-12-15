@@ -1,0 +1,29 @@
+.order-button {
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+  padding: 18px;
+
+  color: var(--color-dark, black);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+
+  background-color: var(--color-yellow, yellow);
+  outline: none;
+}
+
+.order-button:hover,
+.order-button:focus {
+  color: var(--color-white, white);
+
+  box-shadow: inset 0 0 0 2px var(--color-dark, black);
+}
+
+.order-button:hover {
+  text-decoration: underline;
+}
+
+.order-button:active {
+  opacity: 0.5;
+}
