@@ -1,0 +1,303 @@
+.banner {
+  position: relative;
+  z-index: 1;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 $offset 40px;
+
+  background-color: var(--color-background-custom, yellow);
+}
+
+.banner::after {
+  content: "";
+
+  position: absolute;
+  left: 50%;
+  bottom: 74px;
+  z-index: 1;
+
+  display: block;
+  width: 248px;
+  height: 396px;
+
+  background-image: url("../img/human.png");
+  background-size: cover;
+
+  transform: translateX(-46%);
+}
+
+.banner__title {
+  position: relative;
+  z-index: 2;
+
+  display: block;
+  margin: 0;
+  padding: 0;
+
+  color: var(--color-font-dark, black);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 37px;
+  text-align: center;
+}
+
+.banner_subtitle {
+  position: relative;
+  z-index: 2;
+
+  display: block;
+  margin: 5px 0 0;
+  padding: 0;
+
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+}
+
+.banner__order-button {
+  position: relative;
+  z-index: 2;
+
+  margin-top: 333px;
+}
+
+.banner__features-list {
+  position: relative;
+  z-index: 2;
+
+  display: none;
+}
+
+.banner__phone-button {
+  position: relative;
+  z-index: 2;
+
+  display: none;
+}
+
+@media (min-width: $tablet) {
+  .banner::after {
+    left: 60%;
+    bottom: 0;
+
+    transform: translate(0);
+  }
+
+  .banner__title {
+    width: 480px;
+
+    font-size: 50px;
+    line-height: 50px;
+    text-align: left;
+  }
+
+  .banner_subtitle {
+    margin-top: 10px;
+
+    font-size: 23px;
+    text-align: left;
+  }
+
+  .banner__order-button {
+    order: 2;
+
+    box-sizing: border-box;
+    width: 304px;
+    margin-top: 40px;
+  }
+
+  .banner__features-list {
+    order: 1;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 200px);
+    column-gap: 20px;
+    row-gap: 20px;
+    width: 60%;
+    margin-top: 40px;
+  }
+
+  .banner__feature {
+    display: flex;
+    align-items: center;
+
+    color: var(--color-font-dark, black);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+  }
+
+  .banner__feature::before {
+    content: "";
+
+    display: block;
+    margin-right: 8px;
+  }
+
+  .banner__feature--track::before {
+    width: 55px;
+    height: 39px;
+
+    background-image: url("../img/truck-icon.svg");
+  }
+
+  .banner__feature--package::before {
+    width: 42px;
+    height: 38px;
+
+    background-image: url("../img/package-icon.svg");
+  }
+
+  .banner__feature--money::before {
+    width: 43px;
+    height: 41px;
+
+    background-image: url("../img/money-icon.svg");
+  }
+}
+
+@media (min-width: $desktop) {
+  .banner {
+    padding: 53px calc((50% - #{$desktop} / 2) + #{$offset}) 83px;
+  }
+
+  .banner::before {
+    content: "";
+
+    position: absolute;
+    bottom: 170px;
+    left: 50%;
+
+    display: block;
+    width: 500px;
+    height: 300px;
+    margin-left: 207px;
+
+    background-image: url("../img/truck.png");
+    filter: blur(3px);
+  }
+
+  .banner::after {
+    left: 50%;
+
+    width: 355px;
+    height: 566px;
+
+    transform: translateX(-43px);
+  }
+
+  .banner__title {
+    margin-left: -4px;
+
+    font-size: 70px;
+    line-height: 71px;
+  }
+
+  .banner_subtitle {
+    margin-top: 14px;
+
+    font-size: 30px;
+    line-height: 37px;
+  }
+
+  .banner__order-button {
+    order: 0;
+
+    margin-top: 45px;
+  }
+
+  .banner__features-list {
+    order: 0;
+
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 0;
+    margin-top: 76px;
+  }
+
+  .banner__feature {
+    margin-right: 40px;
+  }
+
+  .banner__feature::before {
+    margin-top: -4px;
+  }
+
+  .banner__feature--money::before {
+    margin-left: 5px;
+  }
+
+  .banner__phone-button {
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    z-index: 2;
+
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    width: 100px;
+    height: 100px;
+    margin-right: -568px;
+    margin-bottom: 58px;
+
+    font-size: 0;
+    color: transparent;
+
+    border-radius: 50%;
+    outline: none;
+
+    transition: transform $duration;
+  }
+
+  .banner__phone-button::before,
+  .banner__phone-button::after {
+    content: "";
+
+    position: relative;
+    z-index: 0;
+
+    display: block;
+    grid-row: 1;
+    grid-column: 1;
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+  }
+
+  .banner__phone-button::before {
+    background-color: var(--color-blue, blue);
+    box-shadow: 0 0 0 18px var(--color-blue-o30, blue);
+
+    transition: box-shadow $duration, transform $duration;
+  }
+
+  .banner__phone-button::after {
+    background-color: var(--color-blue, blue);
+    background-image: url("../img/phone.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .banner__phone-button:hover,
+  .banner__phone-button:focus {
+    &::before {
+      box-shadow: 0 0 0 0 var(--color-blue-o30, blue);
+
+      transform: scale(1.36);
+    }
+  }
+
+  .banner__phone-button:hover {
+    transform: rotate(90deg);
+  }
+
+  .banner__phone-button:active {
+    opacity: 0.5;
+  }
+}
