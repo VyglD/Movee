@@ -8,7 +8,7 @@
   width: 100%;
   padding: 0 $offset 40px;
 
-  background-color: var(--color-background-custom, yellow);
+  background-color: var(--color-yellow, yellow);
 }
 
 .banner::after {
@@ -184,10 +184,10 @@
   .banner::after {
     left: 50%;
 
-    width: 355px;
-    height: 566px;
+    width: 381px;
+    height: 609px;
 
-    transform: translateX(-43px);
+    transform: translateX(-91px);
   }
 
   .banner__title {

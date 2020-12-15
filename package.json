@@ -1,5 +1,5 @@
 {
-    "name": "nerds-29",
+    "name": "movee",
     "version": "1.0.0",
     "private": true,
     "description": "Личный проект «Nerds» от HTML Academy",
@@ -43,7 +43,7 @@
     },
     "scripts": {
         "editorconfig": "editorconfig-cli",
-        "stylelint": "stylelint \"source/css/**/*.css\"",
+        "stylelint": "stylelint \"source/styles/**/*.{css,scss}\"",
         "start": "gulp start",
         "build": "gulp build --production",
         "test": "gulp test && npm run stylelint && npm run editorconfig"
@@ -52,7 +52,7 @@
         "*.json",
         "source/html/**/*.html",
         "source/js/**/*.js",
-        "source/css/**/*.css",
+        "source/styles/**/*.{css,scss}",
         "source/img/**/*.svg"
     ],
     "dependencies": {}

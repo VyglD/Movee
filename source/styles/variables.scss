@@ -7,10 +7,6 @@ $offset: 14px;
 $duration: 0.5s;
 
 :root {
-  --color-background: #FFFFFF;
-  --color-background-custom: #FED100;
-  --color-background-custom-focus: #D8B61F;
-
   --color-font-light: #F2F2F2;
   --color-font-dark: #333333;
 
@@ -21,4 +17,6 @@ $duration: 0.5s;
   --color-white: #FFFFFF;
   --color-blue: #3D9BE9;
   --color-blue-o30: rgba(61, 155, 233, 0.3);
+  --color-yellow: #FED100;
+  --color-yellow-2: #D8B61F;
 }

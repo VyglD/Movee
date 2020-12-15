@@ -1,0 +1,131 @@
+.description {
+  display: block;
+  padding: $offset;
+}
+
+.description__title {
+  margin: 26px 0 0;
+
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+
+  text-align: center;
+}
+
+.description__points-list {
+  display: grid;
+  row-gap: 25px;
+  margin: 40px 0 0 30px;
+}
+
+.description__point {
+  display: grid;
+  grid-template-columns: minmax(80px, auto) auto;
+  grid-template-areas: "number title";
+  justify-content: start;
+}
+
+.description__point-number {
+  grid-area: number;
+  justify-self: stretch;
+  margin: 0;
+  padding: 0;
+
+  font-weight: 300;
+  font-size: 50px;
+  line-height: 61px;
+  text-shadow: 2px 0 0 var(--color-yellow, yellow);
+}
+
+.description__point-title {
+  grid-area: title;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+}
+
+.description__point-text {
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: $tablet) {
+  .description {
+    padding: 40px $offset;
+  }
+
+  .description__title {
+    margin-top: 40px;
+
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 37px;
+  }
+
+  .description__points-list {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    column-gap: 50px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .description__point {
+    display: grid;
+    grid-template-rows: min-content;
+    grid-template-areas:
+      "number title"
+      "number text";
+    row-gap: 15px;
+    justify-content: start;
+    align-items: start;
+  }
+
+  .description__point-title {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .description__point-text {
+    grid-area: text;
+    display: block;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+  }
+}
+
+@media (min-width: $desktop) {
+  .description {
+    padding: 50px calc((50% - #{$desktop} / 2) + #{$offset});
+  }
+
+  .description__title {
+    margin: 45px 104px 0 0;
+  }
+
+  .description__points-list {
+    column-gap: 122px;
+    row-gap: 51px;
+    width: 1106px;
+    margin-top: 62px;
+    margin-left: 100px;
+  }
+
+  .description__point {
+    grid-template-columns: minmax(99px, auto) auto;
+  }
+
+  .description__point-title {
+    margin-top: 5px;
+  }
+}
