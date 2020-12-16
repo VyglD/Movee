@@ -156,7 +156,6 @@
     max-width: 250px;
     margin-top: 52px;
     margin-bottom: 78px;
-    padding: 13px;
   }
 
   .cost__offer-features-list {
@@ -177,6 +176,10 @@
 }
 
 @media (min-width: $desktop) {
+  .cost {
+    padding: 48px calc((50% - #{$desktop} / 2) + #{$offset});
+  }
+
   .cost__offers-list {
     grid-template-columns: repeat(auto-fit, minmax(300px, 414px));
     justify-content: center;

@@ -1,4 +1,5 @@
 .order-button {
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   max-width: 100%;
@@ -26,4 +27,10 @@
 
 .order-button:active {
   opacity: 0.5;
+}
+
+@media (min-width: $tablet) {
+  .order-button {
+    padding: 13px;
+  }
 }

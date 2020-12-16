@@ -2,6 +2,7 @@ $nav-offset: 16px;
 
 .header {
   position: relative;
+  z-index: 2;
 
   box-sizing: border-box;
   display: flex;
@@ -30,6 +31,10 @@ $nav-offset: 16px;
 .header__logo {
   position: relative;
   z-index: 3;
+
+  &--no-js {
+    margin: 0 auto;
+  }
 }
 
 .header__nav-toggle {

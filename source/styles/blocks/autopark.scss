@@ -1,0 +1,398 @@
+.autopark {
+  display: block;
+  padding: $offset $offset 45px;
+}
+
+.autopark__title {
+  margin: 27px 0 0;
+
+  color: var(--color-dark, black);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.autopark__subtitle {
+  display: none;
+}
+
+.autopark__types-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 21px 0 0;
+
+  &--no-js {
+    display: none;
+  }
+}
+
+.autopark__type {
+  margin: 0 12px 10px;
+}
+
+.autopark__type-button {
+  display: block;
+  margin: 0;
+  padding: 0;
+
+  color: var(--color-dark, black);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  outline: none;
+
+  &--active {
+    margin-bottom: 0;
+
+    cursor: default;
+    border-color: var(--color-yellow, yellow);
+  }
+}
+
+.autopark__type-button:not(.autopark__type-button--active):hover,
+.autopark__type-button:not(.autopark__type-button--active):focus {
+  color: var(--color-yellow, yellow);
+}
+
+.autopark__type-button:not(.autopark__type-button--active):hover {
+  border-color: var(--color-red, red);
+}
+
+.autopark__type-button:not(.autopark__type-button--active):active {
+  opacity: 0.5;
+}
+
+.autopark__slider-wrapper {
+  display: none;
+
+  &--no-js,
+  &--active {
+    display: block;
+  }
+}
+
+.autopark__slider-switch-button {
+  display: none;
+}
+
+.autopark__slider {
+  display: grid;
+  grid-template-columns: 100%;
+  margin: 0 auto;
+
+  &--no-js {
+    display: block;
+  }
+}
+
+.autopark__slide {
+  grid-row: 1;
+  grid-column: 1;
+  display: none;
+
+  &--no-js {
+    display: block;
+  }
+
+  &--active {
+    display: block;
+  }
+}
+
+.autopark__offer-title {
+  display: none;
+}
+
+.autopark__offer-img-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+
+  overflow: hidden;
+
+  &--reverse {
+    transform: scale(-1, 1);
+  }
+}
+
+.autopark__offer-features-list {
+  display: none;
+}
+
+.autopark__offer-description {
+  display: block;
+  margin: 33px 0 0;
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+}
+
+.autopark__offer-order-button {
+  display: none;
+
+  &--no-js {
+    display: block;
+  }
+}
+
+.autopark__slider-controls {
+  display: flex;
+  justify-content: center;
+  margin: 29px auto 0;
+
+  &--no-js {
+    display: none;
+  }
+}
+
+.autopark__slide-button-wrapper {
+  display: block;
+  margin: 2px;
+}
+
+.autopark__slide-button {
+  position: relative;
+
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background-color: transparent;
+  outline: none;
+
+  &--active {
+    cursor: default;
+    border-color: var(--color-yellow, yellow);
+  }
+}
+
+.autopark__slide-button::after {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: block;
+  width: 8px;
+  height: 8px;
+
+  background-color: var(--color-dark, black);
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+.autopark__slide-button--active::after {
+  width: 10px;
+  height: 10px;
+}
+
+.autopark__slide-button:not(.autopark__slide-button--active):hover,
+.autopark__slide-button:not(.autopark__slide-button--active):focus {
+  border-color: var(--color-red, red);
+}
+
+.autopark__slide-button:not(.autopark__slide-button--active):hover::after {
+  background-color: var(--color-yellow, yellow);
+}
+
+.autopark__slide-button:not(.autopark__slide-button--active):active {
+  opacity: 0.5;
+}
+
+.autopark__slider-order-button {
+  margin: 27px 0 0;
+}
+
+@media (min-width: $tablet) {
+  .autopark__title {
+    margin-top: 20px;
+
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 37px;
+  }
+
+  .autopark__subtitle {
+    display: block;
+    margin-top: 15px;
+
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+  }
+
+  .autopark__types-list {
+    margin-top: 59px;
+  }
+
+  .autopark__type {
+    margin: 0 10px 10px;
+  }
+
+  .autopark__type-button {
+    min-width: 201px;
+    padding: 13px;
+
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+
+    border: 1px solid var(--color-gray-3, gray);
+
+    &--active {
+      border-color: var(--color-yellow, yellow);
+    }
+  }
+
+  .autopark__type-button:not(.autopark__type-button--active):hover,
+  .autopark__type-button:not(.autopark__type-button--active):focus {
+    background-color: var(--color-white-2);
+  }
+
+  .autopark__sliders-list {
+    margin: 36px auto 0;
+  }
+
+  .autopark__slider-wrapper {
+    &--active {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1274px;
+      margin: 0 auto;
+    }
+  }
+
+  .autopark__slider-switch-button {
+    display: block;
+    min-width: 20px;
+    margin: 0 20px;
+    padding: 0;
+
+    border: none;
+    background-color: transparent;
+    background-image: url("../img/switch-icon.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 5px;
+    outline: none;
+
+    &--next {
+      transform: rotate(180deg);
+    }
+  }
+
+  .autopark__slider-switch-button:hover,
+  .autopark__slider-switch-button:focus {
+    background-color: var(--color-white-2, blue);
+    box-shadow: inset 0 0 0 1px var(--color-dark, black);
+  }
+
+  .autopark__slider-switch-button:hover {
+    background-color: var(--color-yellow, yellow);
+  }
+
+  .autopark__slider-switch-button:active {
+    box-shadow: none;
+    opacity: 0.5;
+  }
+
+  .autopark__offer {
+    display: grid;
+    column-gap: 30px;
+    grid-template-columns: 250px 1fr;
+    grid-template-areas:
+      "title img"
+      "features img"
+      "button img"
+      ". img";
+  }
+
+  .autopark__offer-title {
+    grid-area: title;
+    display: block;
+    margin: 10px 0 0;
+  }
+
+  .autopark__offer-img-wrapper {
+    grid-area: img;
+  }
+
+  .autopark__offer-features-list {
+    grid-area: features;
+    display: block;
+    margin: 30px 0 0;
+  }
+
+  .autopark__offer-feature {
+    display: flex;
+    margin-bottom: 28px;
+  }
+
+  .autopark__offer-feature::before {
+    content: "";
+
+    display: block;
+    width: 14px;
+    height: 14px;
+    margin-right: 15px;
+    margin-left: 3px;
+
+    background-image: url("../img/check-icon.svg");
+  }
+
+  .autopark__offer-description {
+    display: none;
+  }
+
+  .autopark__offer-order-button {
+    grid-area: button;
+    display: inline-flex;
+    margin-top: 8px;
+  }
+
+  .autopark__slider-controls {
+    display: none;
+  }
+
+  .autopark__slider-order-button {
+    display: none;
+  }
+}
+
+@media (min-width: $desktop) {
+  .autopark {
+    padding: $offset calc((50% - #{$desktop} / 2) + #{$offset}) 62px;
+  }
+
+  .autopark__offer {
+    column-gap: 125px;
+  }
+
+  .autopark__offer-title {
+    margin-top: 50px;
+
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  .autopark__offer-features-list {
+    margin-top: 37px;
+  }
+}

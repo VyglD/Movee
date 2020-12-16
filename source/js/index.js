@@ -1,5 +1,6 @@
 import {init as initMenu} from "./modules/menu";
 import {init as initCost} from "./modules/cost";
+import {init as initAutopark} from "./modules/autopark";
 
 const NO_JS_MODIFICATOR = `--no-js`;
 
@@ -22,3 +23,4 @@ nodes
 
 initMenu();
 initCost();
+initAutopark();
