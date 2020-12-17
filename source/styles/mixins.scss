@@ -1,0 +1,15 @@
+@mixin custom-button($color, $background-color) {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+  padding: 18px;
+
+  color: $color;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+
+  background-color: $background-color;
+  outline: none;
+}

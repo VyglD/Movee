@@ -1,45 +1,40 @@
 $border-size: 2px;
 
-@mixin order-button($padding, $font-size, $line-height) {
-  display: flex;
-  justify-content: center;
-  max-width: 100%;
-  padding: $padding;
-
-  color: var(--color-font-light, white);
-  font-weight: 600;
-  font-size: $font-size;
-  line-height: $line-height;
-
-  background-color: var(--color-red, red);
+.action-button {
   outline: none;
 }
 
-.action-button {
-  @include order-button(18px, 20px, 24px);
+.action-button span {
+  @include custom-button(
+    var(--color-font-light, white),
+    var(--color-red, red)
+  );
 }
 
-.action-button:hover,
-.action-button:focus {
+.action-button:hover span,
+.action-button:focus span {
   color: var(--color-dark, black);
 
   box-shadow: inset 0 0 0 2px var(--color-white, white);
 }
 
-.action-button:hover {
+.action-button:hover span {
   text-decoration: underline;
 }
 
 .action-button:active {
-  opacity: 0.5;
+  filter: contrast(0.4);
 }
 
 @media (min-width: $desktop) {
-  .action-button {
+  .action-button span {
     position: relative;
     z-index: 2;
 
-    @include order-button(16px, 24px, 29px);
+    padding: 15px;
+
+    font-size: 24px;
+    line-height: 29px;
   }
 
   .action-button::before {
@@ -49,45 +44,27 @@ $border-size: 2px;
     top: 9px;
     left: 10px;
 
+    box-sizing: border-box;
     display: block;
-    width: calc(100% - 2 * #{$border-size});
-    height: calc(100% - 2 * #{$border-size});
+    width: 100%;
+    height: 100%;
 
     border: $border-size solid var(--color-white, white);
 
-    transition: top $duration, left $duration, transform $duration;
+    transition: all $duration;
   }
 
-  .action-button::after {
-    content: "Заказать";
+  .action-button:hover::before,
+  .action-button:focus::before {
+    top: #{-$border-size};
+    left: #{-$border-size};
 
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 3;
-
-    @include order-button(16px, 24px, 29px);
+    width: calc(100% + 2 * #{$border-size});
+    height: calc(100% + 2 * #{$border-size});
   }
 
-  .action-button:hover,
-  .action-button:focus {
-    &::before {
-      top: 0;
-      left: 0;
-
-      transform: scale(1.02, 1.1);
-    }
-
-    &::after {
-      color: var(--color-dark, black);
-    }
-  }
-
-  .action-button:hover {
-    &::after {
-      text-decoration: underline;
-    }
+  .action-button:hover span,
+  .action-button:focus span {
+    box-shadow: none;
   }
 }
