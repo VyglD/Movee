@@ -1,0 +1,59 @@
+-
+  const offers = [
+    {
+      title: "1-комнатная кв-ра",
+      vehicles: "1 фургон",
+      humans: "2 грузчика",
+      time: "Переезд за 4 часа",
+      cost: "8 490₽",
+      highlight: false
+    },
+    {
+      title: "2-комнатная кв-ра",
+      vehicles: "1 газель - 3 метра",
+      humans: "2 грузчика",
+      time: "Переезд за 4 часа",
+      cost: "10 990₽",
+      highlight: true
+    },
+    {
+      title: "3-комнатная кв-ра",
+      vehicles: "1 газель - 4 метра",
+      humans: "2 грузчика",
+      time: "Переезд за 6 часа",
+      cost: "16 490₽",
+      highlight: false
+    },
+  ];
+
+mixin offers-list()
+  ul(class="cost__offers-list list-reset")
+    - for (let i = 0; i < offers.length; i++)
+      li(
+        class=`
+          cost__offer-wrapper
+          cost__offer-wrapper--no-js
+          ${offers[i].highlight ? "cost__offer-wrapper--active" : ""}
+        `
+      )
+        article(class="cost__offer")
+          h3(class="cost__offer-title").
+            #{offers[i].title}
+          ul(class="cost__offer-features-list list-reset")
+            li(class="cost__offer-feature").
+              #{offers[i].vehicles}
+            li(class="cost__offer-feature").
+              #{offers[i].humans}
+            li(class="cost__offer-feature").
+              #{offers[i].time}
+          p(class="cost__offer-price").
+            #{offers[i].cost}
+          a(class="cost__offer-order-button order-button" href="#order").
+            Заказать
+
+section(class="cost")
+  h2(class="cost__title").
+    Цены
+  p(class="cost__subtitle").
+    Фиксированная стоимость на переезд под ключ
+  +offers-list()

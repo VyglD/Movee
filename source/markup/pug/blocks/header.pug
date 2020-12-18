@@ -1,0 +1,28 @@
+mixin nav-item(link, text)
+  li(class="header__nav-item")
+    a(class="header__nav-link" href=link).
+      #{text}
+
+header(class="header header--no-js")
+  img(
+    class="header__logo header__logo--no-js"
+    src="img/logo.svg"
+    width="62"
+    height="20"
+    alt="MOVEE"
+  )
+  button(
+    class="header__nav-toggle header__nav-toggle--no-js"
+    type="button"
+    id="nav-toggle-js"
+  )
+    span.
+      Изменить видимость меню
+  nav(class="header__nav header__nav--no-js" id="nav-js")
+    ul(class="header__nav-list list-reset")
+      +nav-item("#cost", "Цены")
+      +nav-item("#autopark", "Автопарк")
+      +nav-item("#reviews", "Отзывы")
+      +nav-item("#contacts", "Контакты")
+  a(class="header__telephone" href="tel:+78000801213").
+    8(800)-080-12-13

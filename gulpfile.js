@@ -6,6 +6,8 @@ const webp = require(`gulp-webp`);
 const htmlhint = require(`gulp-htmlhint`);
 const htmlValidator = require(`gulp-w3c-html-validator`);
 const htmlmin = require(`gulp-htmlmin`);
+const pug = require(`gulp-pug`);
+const pugLinter = require(`gulp-pug-linter`);
 const sourcemap = require(`gulp-sourcemaps`);
 const sass = require(`gulp-sass`);
 const wait = require(`gulp-wait`);
@@ -63,9 +65,17 @@ const addNewSvg = (path) => {
   minifyPictures([path]);
 };
 
-gulp.task(`test`, () => {
+gulp.task(`test-pug`, () => {
+  return gulp.src(`source/markup/pug/**/*.pug`)
+    .pipe(pugLinter({
+      reporter: `default`,
+      failAfterError: true
+    }));
+});
+
+gulp.task(`test-html`, () => {
   return gulp.src([
-    `source/html/**/*.html`,
+    `source/markup/**/*.html`,
     `build/*.html`
   ])
     .pipe(plumber())
@@ -74,6 +84,8 @@ gulp.task(`test`, () => {
     .pipe(htmlValidator())
     .pipe(htmlValidator.reporter());
 });
+
+gulp.task(`test`, gulp.series(`test-pug`, `test-html`));
 
 gulp.task(`clean`, () => {
   return gulp.src(`build/`, {allowEmpty: true})
@@ -93,7 +105,8 @@ gulp.task(`formatted-pictures`, () => {
 });
 
 gulp.task(`markup`, () => {
-  return gulp.src(`source/html/**/*.html`)
+  return gulp.src(`source/markup/pug/pages/*.pug`)
+    .pipe(pug())
     .pipe(
         gulpif(
             argv.production,
@@ -196,7 +209,7 @@ gulp.task(`server`, () => {
     ui: false
   });
 
-  gulp.watch(`source/html/*.html`).on(`all`, gulp.series(`markup`, `refresh`));
+  gulp.watch(`source/markup/**/*.pug`).on(`all`, gulp.series(`markup`, `refresh`));
   gulp.watch(`source/styles/**/*.scss`).on(`all`, gulp.series(`styles`, `refresh`));
   gulp.watch(`source/js/**/*.js`).on(`all`, gulp.series(`scripts`, `refresh`));
   gulp.watch(`source/img/**/*.{png,jpg}`).on(`add`, (args) => {

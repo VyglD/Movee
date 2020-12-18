@@ -1,0 +1,38 @@
+-
+  const descriptionPoints = [
+    {
+      title: "Оценка объема предстоящих работ",
+      text: "Стоимость переезда зависит от количества комнат, вещей и мебели"
+    },
+    {
+      title: "Упаковка вещей",
+      text: `Упаковываем вещи в коробки, подписываем.
+              Габаритное и деликатное,  упаковываем отдельно.`
+    },
+    {
+      title: "Погрузка и транспортировка вещей",
+      text: `В нашем автопарке имеются машины,
+              подходящие для мебели любых габаритов`
+    },
+    {
+      title: "Распаковка и расстановка мебели",
+      text: `Опытные грузчики быстро расставят мебель
+              и уберут мусор от распаковки.`
+    }
+  ];
+
+mixin points-list()
+  ul(class="description__points-list list-reset")
+    - for (let i = 0; i < descriptionPoints.length; i++)
+      li(class="description__point")
+        p(class="description__point-number").
+          #{`0${i + 1}`}
+        p(class="description__point-title").
+          #{descriptionPoints[i].title}
+        p(class="description__point-text").
+          #{descriptionPoints[i].text}
+
+section(class="description")
+  h2(class="description__title").
+    Как это происходит?
+  +points-list()

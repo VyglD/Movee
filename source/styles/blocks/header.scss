@@ -13,7 +13,7 @@ $nav-offset: 16px;
   background-color: var(--color-yellow, yellow);
 }
 
-.header::before {
+.header:not(.header--no-js)::before {
   position: absolute;
   top: 0;
   left: 0;
@@ -197,7 +197,7 @@ $nav-offset: 16px;
     flex-wrap: nowrap;
   }
 
-  .header::before {
+  .header:not(.header--no-js)::before {
     content: none;
   }
 

@@ -4,7 +4,7 @@
 }
 
 .autopark__title {
-  margin: 27px 0 0;
+  margin: 48px 0 21px;
 
   color: var(--color-dark, black);
   font-weight: 600;
@@ -21,7 +21,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 21px 0 0;
+  margin: 0;
 
   &--no-js {
     display: none;
@@ -71,9 +71,13 @@
 .autopark__slider-wrapper {
   display: none;
 
-  &--no-js,
   &--active {
-    display: block;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &--no-js {
+    display: flex;
   }
 }
 
@@ -96,11 +100,12 @@
   grid-column: 1;
   display: none;
 
-  &--no-js {
+  &--active {
     display: block;
+    margin: 37px 0 0;
   }
 
-  &--active {
+  &--no-js {
     display: block;
   }
 }
@@ -116,10 +121,6 @@
   margin: 0;
 
   overflow: hidden;
-
-  &--reverse {
-    transform: scale(-1, 1);
-  }
 }
 
 .autopark__offer-features-list {
@@ -128,7 +129,7 @@
 
 .autopark__offer-description {
   display: block;
-  margin: 33px 0 0;
+  margin: 31px 0 0;
 
   font-weight: 400;
   font-size: 12px;
@@ -140,14 +141,22 @@
   display: none;
 
   &--no-js {
-    display: block;
+    display: flex;
+    margin: 20px 0 0;
   }
 }
 
 .autopark__slider-controls {
   display: flex;
   justify-content: center;
-  margin: 29px auto 0;
+  margin: 30px auto 0;
+
+  &--disabled {
+    position: relative;
+    z-index: -1;
+
+    opacity: 0;
+  }
 
   &--no-js {
     display: none;
@@ -215,12 +224,16 @@
 }
 
 .autopark__slider-order-button {
-  margin: 27px 0 0;
+  margin: 28px 0 0;
+
+  &--no-js {
+    display: none;
+  }
 }
 
 @media (min-width: $tablet) {
   .autopark__title {
-    margin-top: 20px;
+    margin: 20px 0 0;
 
     font-weight: 600;
     font-size: 30px;
@@ -272,6 +285,7 @@
   .autopark__slider-wrapper {
     &--active {
       display: flex;
+      flex-direction: row;
       justify-content: space-between;
       max-width: 1274px;
       margin: 0 auto;
@@ -281,6 +295,7 @@
   .autopark__slider-switch-button {
     display: block;
     min-width: 20px;
+    min-height: 40px;
     margin: 0 20px;
     padding: 0;
 
@@ -294,6 +309,14 @@
 
     &--next {
       transform: rotate(180deg);
+    }
+
+    &--disabled,
+    &--no-js {
+      position: relative;
+      z-index: -1;
+
+      opacity: 0;
     }
   }
 
@@ -310,6 +333,12 @@
   .autopark__slider-switch-button:active {
     box-shadow: none;
     opacity: 0.5;
+  }
+
+  .autopark__slide {
+    &--active {
+      margin: 0;
+    }
   }
 
   .autopark__offer {
@@ -377,7 +406,7 @@
 
 @media (min-width: $desktop) {
   .autopark {
-    padding: $offset calc((50% - #{$desktop} / 2) + #{$offset}) 62px;
+    padding: $offset calc((50% - #{$desktop} / 2) + #{$offset}) 46px;
   }
 
   .autopark__offer {

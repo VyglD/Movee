@@ -1,0 +1,18 @@
+mixin feature(text, customClass = ``)
+  li(class=`banner__feature ${customClass}`).
+    !{text}
+
+section(class="banner")
+  h2(class="banner__title").
+    Квартирные переезды
+  p(class="banner_subtitle").
+    По Москве и области
+  a(class="banner__order-button action-button" href="#order")
+    span.
+      Заказать
+  ul(class="banner__features-list list-reset")
+    +feature("Более 800 <br> переездов", "banner__feature--track")
+    +feature("Бережная <br> упаковка", "banner__feature--package")
+    +feature("Фиксированная <br> цена", "banner__feature--money")
+  a(class="banner__phone-button" href="#order").
+    Заказать звонок

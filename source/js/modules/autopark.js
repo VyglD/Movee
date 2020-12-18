@@ -3,6 +3,7 @@ import {getPreviousArrayIndex, getNextArrayIndex} from "./utils";
 const CustomClass = {
   SLIDE_ACTIVE: `autopark__slide--active`,
   BUTTON_ACTIVE: `autopark__slide-button--active`,
+  SWITCH_BUTTON_DISABLED: `autopark__slider-switch-button--disabled`,
 };
 
 const DataKey = {
@@ -109,7 +110,10 @@ const init = () => {
         if (slides.length === 1) {
           const btnsContainer = container.querySelector(`.autopark__slider-controls`);
           if (btnsContainer) {
-            btnsContainer.remove();
+            btnsContainer.classList.add(`autopark__slider-controls--disabled`);
+            slideButtons.forEach((btn) => {
+              btn.disabled = true;
+            });
           }
         } else {
           setCustomListeners(
@@ -123,8 +127,11 @@ const init = () => {
 
         if (prevButton && nextButton) {
           if (slides.length === 1) {
-            prevButton.remove();
-            nextButton.remove();
+            prevButton.classList.add(CustomClass.SWITCH_BUTTON_DISABLED);
+            prevButton.disabled = true;
+
+            nextButton.classList.add(CustomClass.SWITCH_BUTTON_DISABLED);
+            nextButton.disabled = true;
           } else {
             const prevButtonClickHandler = switchButtonClickHandler(
                 slides,

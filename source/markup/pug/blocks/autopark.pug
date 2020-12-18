@@ -1,0 +1,191 @@
+-
+  const wagonOffers = [
+    {
+      title: "Газель 3 метра",
+      info: "Газель 3 метра / 1,5 тонны",
+      width: "2 м",
+      height: "2 м",
+      volume: "16 м³",
+      payload: "1,5 т",
+      img: "wagon.png",
+    },
+    {
+      title: "Газель 3,5 метра",
+      info: "Газель 3,5 метра / 2 тонны",
+      width: "2 м",
+      height: "2,5 м",
+      volume: "18 м³",
+      payload: "2 т",
+      img: "wagon-reverse.png",
+    },
+  ];
+
+  const carOffers = [
+    {
+      title: "Каблук 2 метра",
+      info: "Каблук 2 метра / 1 тонны",
+      width: "1,5 м",
+      height: "1,5 м",
+      volume: "10 м³",
+      payload: "800 кг",
+      img: "car.png",
+    },
+  ];
+
+  const truckOffers = [
+    {
+      title: "Грузовик 4 метра",
+      info: "Грузовик 4 метра / 3 тонны",
+      width: "2,5 м",
+      height: "2,5 м",
+      volume: "20 м³",
+      payload: "3 т",
+      img: "truck.png",
+    },
+  ];
+
+  const types = [
+    {
+      title: "Газели",
+      type: "wagon",
+      offers: wagonOffers
+    },
+    {
+      title: "Каблуки",
+      type: "car",
+      offers: carOffers
+    },
+    {
+      title: "Грузовики",
+      type: "truck",
+      offers: truckOffers
+    }
+  ];
+
+mixin types-list()
+  ul(class="autopark__types-list autopark__types-list--no-js list-reset")
+    - for (let i = 0; i < types.length; i++)
+      - const isActive = i === 0;
+      li(class="autopark__type")
+        button(
+          class=`
+            autopark__type-button
+            ${isActive ? "autopark__type-button--active" : ""}
+          `
+          type="button"
+          data-type=`${types[i].type}`
+          disabled= isActive ? true : false
+        ).
+          #{types[i].title}
+
+mixin slides-list(type)
+  ul(class="autopark__slider autopark__slider--no-js list-reset")
+    - for (let i = 0; i < type.offers.length; i++)
+      li(
+        class=`
+          autopark__slide
+          autopark__slide--no-js
+          ${i === 0 ? "autopark__slide--active" : ""}
+        `
+        data-slide=`${type.type}-${i + 1}`
+      )
+        article(class="autopark__offer")
+          h3(class="autopark__offer-title").
+            #{type.offers[i].title}
+          picture(class="autopark__offer-img-wrapper")
+            img(
+              src=`img/${type.offers[i].img}`
+              width="641"
+              height="453"
+              alt="Наша фирменная машина"
+            )
+          ul(class="autopark__offer-features-list list-reset")
+            li(class="autopark__offer-feature").
+              Ширина #{type.offers[i].width}
+            li(class="autopark__offer-feature").
+              Высота #{type.offers[i].height}
+            li(class="autopark__offer-feature").
+              Объем #{type.offers[i].volume}
+            li(class="autopark__offer-feature").
+              Грузоподъемность #{type.offers[i].payload}
+          p(class="autopark__offer-description").
+            #{type.offers[i].info}
+          a(
+            class=`
+              autopark__offer-order-button
+              autopark__offer-order-button--no-js
+              order-button
+            `
+            href="#order"
+          ).
+            Заказать
+
+mixin slides-controls(type)
+  ul(class=`
+      autopark__slider-controls
+      autopark__slider-controls--no-js
+      list-reset
+    `
+  )
+    - for (let i = 0; i < type.offers.length; i++)
+      - const isActive = i === 0;
+      li(class="autopark__slide-button-wrapper")
+        button(
+          class=`
+            autopark__slide-button
+            ${isActive ? "autopark__slide-button--active" : ""}
+          `
+          type="button"
+          aria-label=`Переключить на ${i + 1} слайд`
+          data-slide=`wagon-${i + 1}`
+          disabled= isActive ? true : false
+        )
+
+mixin sliders-list()
+  ul(class="autopark__sliders-list list-reset")
+    - for (let i = 0; i < types.length; i++)
+      li(
+        class=`
+          autopark__slider-wrapper
+          autopark__slider-wrapper--no-js
+          ${i === 0 ? "autopark__slider-wrapper--active" : ""}
+        `
+        data-type=`${types[i].type}`
+      )
+        button(
+          class=`
+            autopark__slider-switch-button
+            autopark__slider-switch-button--previous
+            autopark__slider-switch-button--no-js
+          `
+          type="button"
+          aria-label="Предыдущий слайд"
+        )
+        +slides-list(types[i])
+        button(
+          class=`
+            autopark__slider-switch-button
+            autopark__slider-switch-button--next
+            autopark__slider-switch-button--no-js
+          `
+          type="button"
+          aria-label="Следующий слайд"
+        )
+        +slides-controls(types[i])
+        a(
+          class=`
+            autopark__slider-order-button
+            autopark__slider-order-button--no-js
+            order-button
+          `
+          href="#order"
+        ).
+          Заказать
+
+section(class="autopark")
+  h2(class="autopark__title").
+    Автопарк
+  p(class="autopark__subtitle").
+    10 видов автомобилей от 800 кг до 10 тонн
+  +types-list()
+  +sliders-list()
