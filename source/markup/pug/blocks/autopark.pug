@@ -7,7 +7,8 @@
       height: "2 м",
       volume: "16 м³",
       payload: "1,5 т",
-      img: "wagon.png",
+      img: "img/wagon.png",
+      imgWebp: "img/wagon.webp",
     },
     {
       title: "Газель 3,5 метра",
@@ -16,7 +17,8 @@
       height: "2,5 м",
       volume: "18 м³",
       payload: "2 т",
-      img: "wagon-reverse.png",
+      img: "img/wagon-reverse.png",
+      imgWebp: "img/wagon-reverse.webp",
     },
   ];
 
@@ -28,7 +30,8 @@
       height: "1,5 м",
       volume: "10 м³",
       payload: "800 кг",
-      img: "car.png",
+      img: "img/car.png",
+      imgWebp: "img/car.webp",
     },
   ];
 
@@ -40,7 +43,28 @@
       height: "2,5 м",
       volume: "20 м³",
       payload: "3 т",
-      img: "truck.png",
+      img: "img/truck.png",
+      imgWebp: "img/truck.webp",
+    },
+    {
+      title: "Грузовик 6 метра",
+      info: "Грузовик 6 метра / 10 тонн",
+      width: "4 м",
+      height: "4 м",
+      volume: "40 м³",
+      payload: "10 т",
+      img: "img/truck-reverse.png",
+      imgWebp: "img/truck-reverse.webp",
+    },
+    {
+      title: "Грузовик 5 метра",
+      info: "Грузовик 5 метра / 8 тонн",
+      width: "4 м",
+      height: "3 м",
+      volume: "35 м³",
+      payload: "8 т",
+      img: "img/truck.png",
+      imgWebp: "img/truck.webp",
     },
   ];
 
@@ -93,8 +117,12 @@ mixin slides-list(type)
           h3(class="autopark__offer-title").
             #{type.offers[i].title}
           picture(class="autopark__offer-img-wrapper")
+            source(
+              type="image/webp"
+              srcset=type.offers[i].imgWebp
+            )
             img(
-              src=`img/${type.offers[i].img}`
+              src=type.offers[i].img
               width="641"
               height="453"
               alt="Наша фирменная машина"
@@ -137,12 +165,12 @@ mixin slides-controls(type)
           `
           type="button"
           aria-label=`Переключить на ${i + 1} слайд`
-          data-slide=`wagon-${i + 1}`
+          data-slide=`${type.type}-${i + 1}`
           disabled= isActive ? true : false
         )
 
 mixin sliders-list()
-  ul(class="autopark__sliders-list list-reset")
+  ul(class="autopark__sliders-list autopark__sliders-list--no-js list-reset")
     - for (let i = 0; i < types.length; i++)
       li(
         class=`
@@ -172,15 +200,15 @@ mixin sliders-list()
           aria-label="Следующий слайд"
         )
         +slides-controls(types[i])
-        a(
-          class=`
-            autopark__slider-order-button
-            autopark__slider-order-button--no-js
-            order-button
-          `
-          href="#order"
-        ).
-          Заказать
+  a(
+    class=`
+      autopark__slider-order-button
+      autopark__slider-order-button--no-js
+      order-button
+    `
+    href="#order"
+  ).
+    Заказать
 
 section(class="autopark")
   h2(class="autopark__title").
