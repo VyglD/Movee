@@ -204,13 +204,6 @@
   justify-content: center;
   margin: 30px auto 0;
 
-  &--disabled {
-    position: relative;
-    z-index: -1;
-
-    opacity: 0;
-  }
-
   &--no-js {
     display: none;
   }
@@ -390,7 +383,7 @@
   }
 
   .autopark__slider {
-    width: 100%;
+    width: 80%;
     max-width: 1016px;
     margin: 0 auto;
   }

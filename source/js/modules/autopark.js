@@ -1,9 +1,8 @@
-import {getPreviousArrayIndex, getNextArrayIndex} from "./utils";
-
-const CustomClass = {
-  SLIDE_ACTIVE: `autopark__slide--active`,
-  BUTTON_ACTIVE: `autopark__slide-button--active`,
-  SWITCH_BUTTON_DISABLED: `autopark__slider-switch-button--disabled`,
+const ActiveClass = {
+  TYPE_BUTTON: `autopark__type-button--active`,
+  SLIDER: `autopark__slider-wrapper--active`,
+  SLIDE: `autopark__slide--active`,
+  SLIDE_BUTTON: `autopark__slide-button--active`,
 };
 
 const DataKey = {
@@ -11,143 +10,164 @@ const DataKey = {
   SLIDE: `slide`,
 };
 
-const getActiveElement = (elements, className) => {
-  return elements.find((element) => element.classList.contains(className));
+const PackKey = {
+  TYPE_BUTTON: `TYPE_BUTTON`,
+  SLIDER: `SLIDER`,
+  SLIDE: `SLIDE`,
+  SLIDE_BUTTON: `SLIDE_BUTTON`,
+};
+
+const ActivePack = {
+  [PackKey.TYPE_BUTTON]: null,
+  [PackKey.SLIDER]: null,
+  [PackKey.SLIDE]: null,
+  [PackKey.SLIDE_BUTTON]: null,
+};
+
+const isActivePackExist = () => {
+  return ActivePack[PackKey.TYPE_BUTTON] &&
+    ActivePack[PackKey.SLIDER] &&
+    ActivePack[PackKey.SLIDE] &&
+    ActivePack[PackKey.SLIDE_BUTTON];
+};
+
+const getNextArrayIndex = (currentIndex, arr) => {
+  return (currentIndex + 1) % arr.length;
+};
+
+const getPreviousArrayIndex = (currentIndex, arr) => {
+  return (currentIndex + (arr.length - 1)) % arr.length;
 };
 
 const getElementByDataKey = (elements, dataKey, dataValue) => {
   return elements.find((element) => element.dataset[dataKey] === dataValue);
 };
 
-const changeActiveView = (oldView, newView, activeViewClass) => {
-  oldView.classList.remove(activeViewClass);
-  newView.classList.add(activeViewClass);
+const setActiveElement = (element, activeElementClass, packKey) => {
+  element.classList.add(activeElementClass);
+
+  ActivePack[packKey] = element;
 };
 
-const changeActiveButton = (oldButton, newButton, activeBtnClass) => {
-  oldButton.classList.remove(activeBtnClass);
-  oldButton.disabled = false;
-
-  newButton.classList.add(activeBtnClass);
-  newButton.disabled = true;
+const canselActiveElement = (element, activeElementClass) => {
+  if (element.classList.contains(activeElementClass)) {
+    element.classList.remove(activeElementClass);
+  }
 };
 
-const setCustomListeners = (buttons, views, activeBtnClass, activeViewClass, dataKey) => {
-  const clickHandler = (evt) => {
-    const activeButton = getActiveElement(buttons, activeBtnClass);
+const canselActiveButton = (button, activeButtonClass) => {
+  canselActiveElement(button, activeButtonClass);
 
-    if (evt.target !== activeButton) {
-      const activeView = getActiveElement(views, activeViewClass);
-      const newView = getElementByDataKey(views, dataKey, evt.target.dataset[dataKey]);
-
-      changeActiveView(activeView, newView, activeViewClass);
-      changeActiveButton(activeButton, evt.target, activeBtnClass);
-    }
-  };
-
-  buttons.forEach((button) => {
-    button.addEventListener(`click`, clickHandler);
-  });
+  button.disabled = false;
 };
 
-const switchButtonClickHandler = (slides, slideButtons, getNewIndex) => {
+const setActiveButton = (button, activeButtonClass, packKey) => {
+  setActiveElement(button, activeButtonClass, packKey);
+
+  button.disabled = true;
+};
+
+const setActiveSlide = (slide, slideButton) => {
+  setActiveElement(slide, ActiveClass.SLIDE, PackKey.SLIDE);
+  setActiveButton(slideButton, ActiveClass.SLIDE_BUTTON, PackKey.SLIDE_BUTTON);
+};
+
+const canselActiveSlide = () => {
+  canselActiveElement(ActivePack[PackKey.SLIDE], ActiveClass.SLIDE);
+  canselActiveButton(ActivePack[PackKey.SLIDE_BUTTON], ActiveClass.SLIDE_BUTTON);
+};
+
+const setActiveType = (typeButton, slider, slide, slideButton) => {
+  setActiveButton(typeButton, ActiveClass.TYPE_BUTTON, PackKey.TYPE_BUTTON);
+  setActiveElement(slider, ActiveClass.SLIDER, PackKey.SLIDER);
+  setActiveSlide(slide, slideButton);
+};
+
+const canselActiveType = () => {
+  if (isActivePackExist()) {
+    canselActiveButton(ActivePack[PackKey.TYPE_BUTTON], ActiveClass.TYPE_BUTTON);
+    canselActiveElement(ActivePack[PackKey.SLIDER], ActiveClass.SLIDER);
+    canselActiveSlide();
+  }
+};
+
+const getSwitchBtnClickHandler = (slides, slideButtons, getNewIndex) => {
   return () => {
-    const currentIndex = slides
-      .findIndex((node) => node.classList.contains(CustomClass.SLIDE_ACTIVE));
+    const activeSlideIndex = slides.findIndex((node) => node === ActivePack[PackKey.SLIDE]);
+    const newSlideIndex = getNewIndex(activeSlideIndex, slides);
 
-    const newIndex = getNewIndex(currentIndex, slides);
-
-    if (newIndex !== currentIndex) {
-      const currentSlide = slides[currentIndex];
-      const newSlide = slides[newIndex];
-
-      const activeButton = getActiveElement(slideButtons, CustomClass.BUTTON_ACTIVE);
-      const newButton = getElementByDataKey(
+    if (newSlideIndex !== activeSlideIndex) {
+      const newSlide = slides[newSlideIndex];
+      const newSlideButton = getElementByDataKey(
           slideButtons,
           DataKey.SLIDE,
           newSlide.dataset[DataKey.SLIDE]
       );
 
-      changeActiveView(currentSlide, newSlide, CustomClass.SLIDE_ACTIVE);
-      changeActiveButton(activeButton, newButton, CustomClass.BUTTON_ACTIVE);
+      canselActiveSlide();
+      setActiveSlide(newSlide, newSlideButton);
     }
   };
 };
 
+const setSwitchBtnClickHandler = (slides, slideBts, getNewIndex, switchBtn) => {
+  switchBtn.addEventListener(
+      `click`,
+      getSwitchBtnClickHandler(slides, slideBts, getNewIndex)
+  );
+};
+
 const init = () => {
-  let typeButtons = Array.from(document.querySelectorAll(`.autopark__type-button`));
-  let sliders = Array.from(document.querySelectorAll(`.autopark__slider-wrapper`));
+  let typeButtons = document.querySelectorAll(`.autopark__type-button`);
+  let sliders = document.querySelectorAll(`.autopark__slider-wrapper`);
 
   if (typeButtons && sliders) {
     typeButtons = Array.from(typeButtons);
     sliders = Array.from(sliders);
 
-    setCustomListeners(
-        typeButtons,
-        sliders,
-        `autopark__type-button--active`,
-        `autopark__slider-wrapper--active`,
-        DataKey.TYPE
-    );
-  }
+    sliders.forEach((slider, index) => {
+      const typeButton = getElementByDataKey(typeButtons, DataKey.TYPE, slider.dataset[DataKey.TYPE]);
+      const prevButton = slider.querySelector(`.autopark__slider-switch-button--previous`);
+      const nextButton = slider.querySelector(`.autopark__slider-switch-button--next`);
 
-  let sliderContainers = document.querySelectorAll(`.autopark__slider-wrapper`);
+      let slides = slider.querySelectorAll(`.autopark__slide`);
+      let slideButtons = slider.querySelectorAll(`.autopark__slide-button`);
 
-  if (sliderContainers) {
-    sliderContainers = Array.from(sliderContainers);
-
-    sliderContainers.forEach((container) => {
-      const prevButton = container.querySelector(`.autopark__slider-switch-button--previous`);
-      const nextButton = container.querySelector(`.autopark__slider-switch-button--next`);
-
-      let slides = container.querySelectorAll(`.autopark__slide`);
-      let slideButtons = container.querySelectorAll(`.autopark__slide-button`);
-
-      if (slides && slideButtons) {
+      if (typeButton && prevButton && nextButton && slides && slideButtons) {
         slides = Array.from(slides);
         slideButtons = Array.from(slideButtons);
 
+        typeButton.addEventListener(`click`, () => {
+          canselActiveType();
+          setActiveType(typeButton, slider, slides[0], slideButtons[0]);
+        });
+
+        slideButtons.forEach((btn) => {
+          btn.addEventListener(`click`, (evt) => {
+            if (evt.target !== ActivePack[PackKey.SLIDE_BUTTON]) {
+              const newSlideButton = evt.target;
+              const newSlide = getElementByDataKey(
+                  slides,
+                  DataKey.SLIDE,
+                  newSlideButton.dataset[DataKey.SLIDE]
+              );
+
+              canselActiveSlide();
+              setActiveSlide(newSlide, newSlideButton);
+            }
+          });
+        });
+
         if (slides.length === 1) {
-          const btnsContainer = container.querySelector(`.autopark__slider-controls`);
-          if (btnsContainer) {
-            btnsContainer.classList.add(`autopark__slider-controls--disabled`);
-            slideButtons.forEach((btn) => {
-              btn.disabled = true;
-            });
-          }
+          prevButton.remove();
+          nextButton.remove();
         } else {
-          setCustomListeners(
-              slideButtons,
-              slides,
-              CustomClass.BUTTON_ACTIVE,
-              CustomClass.SLIDE_ACTIVE,
-              DataKey.SLIDE
-          );
+          setSwitchBtnClickHandler(slides, slideButtons, getPreviousArrayIndex, prevButton);
+          setSwitchBtnClickHandler(slides, slideButtons, getNextArrayIndex, nextButton);
         }
 
-        if (prevButton && nextButton) {
-          if (slides.length === 1) {
-            prevButton.classList.add(CustomClass.SWITCH_BUTTON_DISABLED);
-            prevButton.disabled = true;
-
-            nextButton.classList.add(CustomClass.SWITCH_BUTTON_DISABLED);
-            nextButton.disabled = true;
-          } else {
-            const prevButtonClickHandler = switchButtonClickHandler(
-                slides,
-                slideButtons,
-                getPreviousArrayIndex
-            );
-
-            const nextButtonClickHandler = switchButtonClickHandler(
-                slides,
-                slideButtons,
-                getNextArrayIndex
-            );
-
-            prevButton.addEventListener(`click`, prevButtonClickHandler);
-            nextButton.addEventListener(`click`, nextButtonClickHandler);
-          }
+        if (index === 0) {
+          setActiveType(typeButton, slider, slides[0], slideButtons[0]);
         }
       }
     });
