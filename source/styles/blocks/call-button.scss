@@ -1,0 +1,33 @@
+.call-button {
+  @include custom-button(
+    var(--color-dark, black),
+    var(--color-yellow, yellow)
+  );
+
+  width: 100%;
+  margin: 10px auto 0;
+  padding: 17px;
+
+  border: 1px solid var(--color-dark, black);
+}
+
+.call-button:hover,
+.call-button:focus {
+  color: var(--color-white, white);
+
+  border-color: var(--color-white, white);
+}
+
+.call-button:hover {
+  text-decoration: underline;
+}
+
+.call-button:active {
+  opacity: 0.5;
+}
+
+@media (min-width: $tablet) {
+  .call-button {
+    padding: 12px;
+  }
+}

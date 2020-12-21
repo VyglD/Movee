@@ -1,0 +1,86 @@
+-
+  const reviews = [
+    {
+      name: `Ирина`,
+      date: `24.03.2019`,
+      rate: `5`,
+      text: `Обращение к вам за помощью в переезде оставило только положительные
+              впечатления. Хотелось отметить замечательного водителя газели
+              Алексея. Были трудности с заездом во двор, он проявил себя как
+              компетентный и профессиональный сотрудник, за что ему огромное
+              спасибо. Буду рекомендовать вас всем своим друзьям и знакомым.`,
+      visibility: false,
+    },
+    {
+      name: `Светлана Васильевна`,
+      date: `13.09.2019`,
+      rate: `5`,
+      text: `Сегодня ( 13.09.2019 ) мы переехали. Остались очень довольны,
+              несмотря на то, что к нам опоздали на 1,5 часа. Морально были
+              к этому готовы ( в прошлый переезд в другой фирме тоже опоздали
+              на час). Водитель заранее позвонил, предупредил, что задерживается.
+              Когда осуществлялась погрузка, мы не могли поверить своим глазам,
+              насколько аккуратно осуществлялась работа. Выражаю вам и вашей
+              команде большую признательность.`,
+      visibility: true,
+    },
+    {
+      name: `Ольга Петрова`,
+      date: `11.11.2019`,
+      rate: `5`,
+      text: `Могу на 100% порекомендовать компанию MOVEE и отметить,
+              что цены фиксированы, что упрощает расчет. Безо всяких заморочек,
+              в отличии от их конкурентов. Упаковали все качественно и быстро.
+              Все вещи приехали в сохранности. Особлая благодарность Александру
+              за его профессионализм.`,
+      visibility: false,
+    },
+    {
+      name: `Ким Чи`,
+      date: `22.22.2022`,
+      rate: `4`,
+      text: `Быстро, четко, здорово`,
+      visibility: false,
+    },
+  ];
+
+mixin reviews-list()
+  ul(class="reviews__list list-reset")
+    each review in reviews
+      li(
+        class=`
+          reviews__item
+          reviews__item--no-js
+          ${review.visibility ? "reviews__item--visible" : ""}
+        `
+      )
+        article(class="reviews__review")
+          p(class="reviews__review-name").
+            #{review.name}
+          p(class="reviews__review-date").
+            #{review.date}
+          div(class="reviews__review-rate")
+            - for (let i = 0; i < review.rate; i++)
+              img(
+                src="img/star.svg"
+                width="15"
+                height="15"
+                alt=i
+              )
+          p(class="reviews__review-text").
+            !{review.text}
+        button(
+          class="reviews__item-open-button reviews__item-open-button--no-js"
+          type="button"
+        ).
+          Читать полностью
+
+section(class="reviews")
+  h2(class="reviews__title").
+    Отзывы
+  +reviews-list()
+  button(
+    class="reviews__show-button reviews__show-button--no-js call-button"
+    type="button"
+  ).
+    Все отзывы
