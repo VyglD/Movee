@@ -1,4 +1,4 @@
-$max-review-width: 420px;
+$max-review-width: 410px;
 $offset-right: 106px;
 
 .reviews {
@@ -19,17 +19,18 @@ $offset-right: 106px;
 
 .reviews__item {
   display: none;
+  flex-direction: column;
   width: 100%;
   max-width: $max-review-width;
   margin: 41px auto 0;
 
-  &--hidden {
-    display: none;
-  }
-
   &--visible,
   &--no-js {
-    display: block;
+    display: flex;
+  }
+
+  &--hidden {
+    display: none;
   }
 }
 
@@ -56,6 +57,7 @@ $offset-right: 106px;
 
 .reviews__item-open-button {
   display: block;
+  margin-right: auto;
   padding: 0;
 
   font-weight: 500;
@@ -109,7 +111,7 @@ $offset-right: 106px;
   .reviews__list {
     box-sizing: border-box;
     display: grid;
-    column-gap: 30px;
+    column-gap: 40px;
     grid-template-columns: repeat(auto-fit, minmax($max-review-width, 1fr));
     justify-items: center;
     max-width: 100%;
@@ -117,9 +119,13 @@ $offset-right: 106px;
   }
 
   .reviews__item {
-    display: block;
+    display: flex;
     margin-left: 0;
     margin-right: 0;
+
+    &--hidden {
+      display: none;
+    }
   }
 
   .reviews__review-name {

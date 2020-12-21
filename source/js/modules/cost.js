@@ -6,7 +6,7 @@ const init = () => {
     openCostsButton.addEventListener(`click`, () => {
       Array.from(costsList.querySelectorAll(`li`))
         .forEach((node) => {
-          node.classList.add(`cost__offer-wrapper--opened`);
+          node.classList.add(`cost__offer-wrapper--visible`);
         });
 
       openCostsButton.remove();
