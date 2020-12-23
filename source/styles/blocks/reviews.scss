@@ -17,6 +17,10 @@ $offset-right: 106px;
   text-align: center;
 }
 
+.reviews__list {
+  padding-right: 5px;
+}
+
 .reviews__item {
   display: none;
   flex-direction: column;
@@ -116,6 +120,7 @@ $offset-right: 106px;
     justify-items: center;
     max-width: 100%;
     padding-left: 30px;
+    padding-right: 0;
   }
 
   .reviews__item {
@@ -142,7 +147,7 @@ $offset-right: 106px;
 
 @media (min-width: $desktop) {
   .reviews {
-    padding: 48px calc((50% - #{$desktop} / 2) + #{$offset}) 20px;
+    padding: 48px calc((50% - #{$desktop} / 2) + #{$offset}) 95px;
   }
 
   .reviews__title {
@@ -155,6 +160,14 @@ $offset-right: 106px;
     justify-items: start;
     width: calc(100% + #{$offset-right});
     padding: 0;
+  }
+
+  .reviews__review-date {
+    margin-right: 9px;
+  }
+
+  .reviews__review-text {
+    margin-top: 19px;
   }
 
   .reviews__show-button {

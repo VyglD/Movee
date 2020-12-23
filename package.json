@@ -60,5 +60,7 @@
         "source/styles/**/*.{css,scss}",
         "source/img/**/*.svg"
     ],
-    "dependencies": {}
+    "dependencies": {
+        "inputmask": "5.0.5"
+    }
 }

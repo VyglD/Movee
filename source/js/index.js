@@ -2,6 +2,7 @@ import {init as initMenu} from "./modules/menu";
 import {init as initCost} from "./modules/cost";
 import {init as initAutopark} from "./modules/autopark";
 import {init as initReviews} from "./modules/reviews";
+import {init as initCallback} from "./modules/callback";
 
 const NO_JS_MODIFICATOR = `--no-js`;
 
@@ -26,3 +27,4 @@ initMenu();
 initCost();
 initAutopark();
 initReviews();
+initCallback();

@@ -1,6 +1,8 @@
 $border-size: 2px;
 
 .action-button {
+  position: relative;
+
   outline: none;
 }
 
@@ -11,22 +13,30 @@ $border-size: 2px;
   );
 }
 
-.action-button:hover span,
-.action-button:focus span {
+.action-button:not(:disabled):hover span,
+.action-button:not(:disabled):focus span {
   color: var(--color-dark, black);
 
   box-shadow: inset 0 0 0 2px var(--color-white, white);
 }
 
-.action-button:hover span {
+.action-button:not(:disabled):hover span {
   text-decoration: underline;
 }
 
-.action-button:active {
+.action-button:not(:disabled):active {
   filter: contrast(0.4);
 }
 
+.action-button:disabled {
+  opacity: 0.1;
+}
+
 @media (min-width: $desktop) {
+  .action-button {
+    --button-stroke-color: var(--color-white, white);
+  }
+
   .action-button span {
     position: relative;
     z-index: 2;
@@ -49,13 +59,13 @@ $border-size: 2px;
     width: 100%;
     height: 100%;
 
-    border: $border-size solid var(--color-white, white);
+    border: $border-size solid var(--button-stroke-color);
 
     transition: all $duration;
   }
 
-  .action-button:hover::before,
-  .action-button:focus::before {
+  .action-button:not(:disabled):hover::before,
+  .action-button:not(:disabled):focus::before {
     top: #{-$border-size};
     left: #{-$border-size};
 
@@ -63,8 +73,8 @@ $border-size: 2px;
     height: calc(100% + 2 * #{$border-size});
   }
 
-  .action-button:hover span,
-  .action-button:focus span {
+  .action-button:not(:disabled):hover span,
+  .action-button:not(:disabled):focus span {
     box-shadow: none;
   }
 }
