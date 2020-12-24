@@ -1,6 +1,7 @@
 -
   const wagonOffers = [
     {
+      id: "wagon-1",
       title: "Газель 3 метра",
       info: "Газель 3 метра / 1,5 тонны",
       width: "2 м",
@@ -11,6 +12,7 @@
       imgWebp: "img/wagon.webp",
     },
     {
+      id: "wagon-2",
       title: "Газель 3,5 метра",
       info: "Газель 3,5 метра / 2 тонны",
       width: "2 м",
@@ -24,6 +26,7 @@
 
   const carOffers = [
     {
+      id: "car-1",
       title: "Каблук 2 метра",
       info: "Каблук 2 метра / 1 тонны",
       width: "1,5 м",
@@ -37,6 +40,7 @@
 
   const truckOffers = [
     {
+      id: "truck-1",
       title: "Грузовик 4 метра",
       info: "Грузовик 4 метра / 3 тонны",
       width: "2,5 м",
@@ -47,6 +51,7 @@
       imgWebp: "img/truck.webp",
     },
     {
+      id: "truck-2",
       title: "Грузовик 6 метра",
       info: "Грузовик 6 метра / 10 тонн",
       width: "4 м",
@@ -57,6 +62,7 @@
       imgWebp: "img/truck-reverse.webp",
     },
     {
+      id: "truck-3",
       title: "Грузовик 5 метра",
       info: "Грузовик 5 метра / 8 тонн",
       width: "4 м",
@@ -135,7 +141,7 @@ mixin slides-list(type)
               autopark__offer-order-button--no-js
               order-button
             `
-            href=`#order${type.offers[i].info}`
+            href=`#order-${type.offers[i].id}`
           ).
             Заказать
 

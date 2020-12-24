@@ -1,10 +1,12 @@
 $callback-max-width: 300px;
-$callback-line-height: 20px;
-$callback-line-height-small: 12px;
-$callback-font-size: 16px;
-$callback-font-size-small: 9px;
+$callback-input-border-size: 1px;
 
 .callback {
+  --callback-line-height: 20px;
+  --callback-line-height-small: 12px;
+  --callback-font-size: 16px;
+  --callback-font-size-small: 9px;
+
   padding: $offset;
   padding-bottom: 71px;
 }
@@ -53,8 +55,8 @@ $callback-font-size-small: 9px;
 
   color: var(--color-dark, black);
   font-weight: 500;
-  font-size: $callback-font-size;
-  line-height: $callback-line-height;
+  font-size: var(--callback-font-size);
+  line-height: var(--callback-line-height);
 }
 
 .callback__form-field input {
@@ -66,7 +68,7 @@ $callback-font-size-small: 9px;
   padding: 0 5px;
 
   border: none;
-  border-bottom: 1px solid var(--color-dark, black);
+  border-bottom: $callback-input-border-size solid var(--color-dark, black);
   outline: none;
   overflow: hidden;
 }
@@ -78,7 +80,8 @@ $callback-font-size-small: 9px;
 .callback__form-field input:focus,
 .callback__form-field--no-js input,
 .callback__form-field--visible input {
-  height: $callback-line-height;
+  height: var(--callback-line-height);
+  margin-top: $callback-input-border-size;
 }
 
 .callback__form-field input:hover,
@@ -90,14 +93,14 @@ $callback-font-size-small: 9px;
 .callback__form-field--visible label {
   padding-bottom: 0;
 
-  font-size: $callback-font-size-small;
-  line-height: $callback-line-height-small;
+  font-size: var(--callback-font-size-small);
+  line-height: var(--callback-line-height-small);
 }
 
 .callback__form-field label {
   display: block;
   margin-left: 2px;
-  padding-bottom: $callback-line-height-small;
+  padding-bottom: var(--callback-line-height-small);
 
   cursor: pointer;
 
@@ -223,6 +226,9 @@ $callback-font-size-small: 9px;
 
 @media (min-width: $desktop) {
   .callback {
+    --callback-line-height: 24px;
+    --callback-font-size: 20px;
+
     padding: 76px calc(50% - 1001px / 2) 123px;
   }
 
@@ -239,13 +245,6 @@ $callback-font-size-small: 9px;
 
   .callback__form-field {
     margin-bottom: 0;
-  }
-
-  .callback__form-field--visible label {
-    padding-bottom: 0;
-
-    font-size: $callback-font-size-small;
-    line-height: $callback-line-height-small;
   }
 
   .callback__submit span {

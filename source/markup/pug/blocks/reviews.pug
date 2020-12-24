@@ -55,6 +55,8 @@ mixin reviews-list()
         `
       )
         article(class="reviews__review")
+          h3(class="visually-hidden").
+            Отзыв клиента #{review.name} от #{review.date}
           p(class="reviews__review-name").
             #{review.name}
           p(class="reviews__review-date").
