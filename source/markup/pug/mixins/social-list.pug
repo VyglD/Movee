@@ -1,0 +1,14 @@
+mixin social-item(modificator, label)
+  li(class="social-list__item")
+    a(
+      class=`social-list__link social-list__link--${modificator}`
+      href="#blank"
+      aria-label=label
+    )
+
+mixin social-list(customClass)
+  ul(class=`${customClass} social-list list-reset`)
+    +social-item(`youtube`, `Переход на наш YouTube канал`)
+    +social-item(`vk`, `Переход в нашу группу вКонтакте`)
+    +social-item(`fb`, `Переход в нашу группу FaceBook`)
+    +social-item(`instagram`, `Переход в нашу страницу в Instagram`)

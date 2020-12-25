@@ -1,7 +1,3 @@
-$social-size: 18px;
-$social-stroke-size: 22px;
-$social-stroke-width: 1px;
-
 .placement {
   position: relative;
   display: block;
@@ -52,7 +48,7 @@ $social-stroke-width: 1px;
   margin-top: 20px;
 
   &--mail {
-    margin-top: 17px;
+    margin-top: 15px;
   }
 }
 
@@ -144,64 +140,12 @@ $social-stroke-width: 1px;
   }
 
   .placement__social-list {
+    --social-item-offset: 25px;
+
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
     margin-top: 57px;
-  }
-
-  .placement__social-item {
-    margin-left: 25px;
-  }
-
-  .placement__social-link {
-    position: relative;
-
-    display: block;
-    width: $social-size;
-    height: $social-size;
-
-    background-position: bottom;
-    background-size: $social-size;
-    outline: none;
-
-    transition: background-position $duration;
-
-    &--youtube {
-      background-image: url("../img/youtube-icon.svg");
-    }
-
-    &--vk {
-      background-image: url("../img/vk-icon.svg");
-    }
-
-    &--fb {
-      background-image: url("../img/fb-icon.svg");
-    }
-
-    &--instagram {
-      background-image: url("../img/instagram-icon.svg");
-    }
-  }
-
-  .placement__social-link:hover,
-  .placement__social-link:focus {
-    background-position: top;
-  }
-
-  .placement__social-link:hover::before {
-    content: "";
-
-    position: absolute;
-    left: #{($social-size - $social-stroke-size) / 2 - $social-stroke-width};
-    top: #{($social-size - $social-stroke-size) / 2 - $social-stroke-width};
-
-    display: block;
-    width: $social-stroke-size;
-    height: $social-stroke-size;
-
-    border: $social-stroke-width solid var(--color-yellow, yellow);
-    border-radius: 5px;
   }
 }
 

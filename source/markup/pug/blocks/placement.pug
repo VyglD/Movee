@@ -1,10 +1,4 @@
-mixin social-item(modificator, label)
-  li(class="placement__social-item")
-    a(
-      class=`placement__social-link placement__social-link--${modificator}`
-      href="#blank"
-      aria-label=label
-    )
+include ../mixins/social-list.pug
 
 section(class="placement")
   h2(class="visually-hidden").
@@ -24,14 +18,14 @@ section(class="placement")
       src="img/logo.svg"
       alt="MOVEE"
     )
-    ul(class="placement__contacts-wrapper")
+    ul(class="placement__contacts-wrapper list-reset")
       li(class="placement__contact")
         p(class="placement__adress").
           Москва, Волгоградский пр-т, 38
       li(class="placement__contact")
         a(
           class="placement__phone"
-          href="tel:+7800801213"
+          href="tel:+78000801213"
         ).
           8 (800)-080-12-13
       li(class="placement__contact placement__contact--mail")
@@ -40,8 +34,4 @@ section(class="placement")
           href="mailto:hello@movee.ru"
         ).
           hello@movee.ru
-    ul(class="placement__social-list list-reset")
-      +social-item(`youtube`, `Переход на наш YouTube канал`)
-      +social-item(`vk`, `Переход в нашу группу вКонтакте`)
-      +social-item(`fb`, `Переход в нашу группу FaceBook`)
-      +social-item(`instagram`, `Переход в нашу страницу в Instagram`)
+    +social-list(`placement__social-list`)

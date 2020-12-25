@@ -1,0 +1,52 @@
+include ../mixins/social-list.pug
+
+mixin nav-item(link, title)
+  li(class="footer__nav-item")
+    a(href=link class="footer__link footer__link--nav").
+      !{title}
+
+footer(class="footer")
+  ul(class="footer__blocks list-reset")
+    li(class="footer__block")
+      img(
+        class="footer__logo"
+        width="115"
+        height="37"
+        src="img/logo.svg"
+        alt="MOVEE"
+      )
+      a(
+        class="footer__link footer__link--policy"
+        href="#blank"
+      ).
+        Политика конфиденциальнности
+      a(
+        class="footer__link footer__link--agreement"
+        href="#blank"
+      ).
+        Соглашение на обработку персональных данных
+    li(class="footer__block")
+      ul(class="footer__nav-list list-reset")
+        +nav-item(`#main`, `Главная`)
+        +nav-item(`#cost`, `Цена`)
+        +nav-item(`#autopark`, `Автопарк`)
+        +nav-item(`#reviews`, `Отзывы`)
+        +nav-item(`#contacts`, `Контакты`)
+    li(class="footer__block")
+      +social-list(`footer__social-list`)
+      a(
+        class="footer__link footer__link--mail"
+        href="mailto:hello@movee.ru"
+      ).
+        hello@movee.ru
+    li(class="footer__block")
+      button(
+        class="footer__call-button call-button"
+        type="button"
+      ).
+        Обратный звонок
+      a(
+        class="footer__link footer__link--phone"
+        href="tel:+78000801213"
+      ).
+        8 (800)-080-12-13

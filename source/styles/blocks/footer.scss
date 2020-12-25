@@ -1,0 +1,177 @@
+.footer {
+  display: block;
+  padding: $offset $offset 50px;
+
+  background-color: var(--color-yellow, yellow);
+}
+
+.footer__block {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__logo {
+  margin: 53px auto 0;
+}
+
+.footer__link {
+  display: block;
+  padding: 0 20px;
+
+  color: var(--color-dark, black);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+
+  outline: none;
+
+  &--policy {
+    margin-top: 44px;
+  }
+
+  &--agreement {
+    margin-top: 20px;
+    margin-bottom: 19px;
+  }
+
+  &--nav {
+    margin-top: 15px;
+  }
+
+  &--nav,
+  &--mail,
+  &--phone {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  &--mail {
+    margin-top: 20px;
+  }
+
+  &--mail,
+  &--phone {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+
+    border-bottom: 1px solid var(--color-dark, black);
+  }
+
+  &--phone {
+    display: none;
+  }
+}
+
+.footer__link:hover,
+.footer__link:focus {
+  color: var(--color-white, white);
+}
+
+.footer__link:hover {
+  text-decoration: underline;
+}
+
+.footer__link--mail:focus,
+.footer__link--phone:focus {
+  border-color: var(--color-white, white);
+}
+
+.footer__link--mail:hover,
+.footer__link--phone:hover {
+  text-decoration: none;
+
+  border-color: transparent;
+}
+
+.footer__nav-list {
+  margin-top: 10px;
+}
+
+.footer__social-list {
+  --social-item-color-stroke: var(--color-white, white);
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 165px;
+  margin: 46px auto 0;
+}
+
+.footer__call-button {
+  max-width: 250px;
+  margin-top: 46px;
+}
+
+@media (min-width: $tablet) {
+  .footer__blocks {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .footer__block {
+    width: 50%;
+  }
+
+  .footer__link {
+    &--phone {
+      display: block;
+      margin-top: 21px;
+    }
+  }
+}
+
+@media (min-width: $desktop) {
+  .footer {
+    padding: 84px calc((50% - #{$desktop} / 2) + #{$offset}) 101px;
+  }
+
+  .footer__blocks {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .footer__block {
+    width: 25%;
+    max-width: 300px;
+  }
+
+  .footer__logo {
+    margin: 22px 0 0;
+  }
+
+  .footer__link {
+    padding: 0;
+
+    text-align: left;
+
+    &--policy,
+    &--agreement {
+      padding-right: 20px;
+    }
+
+    &--policy {
+      margin-top: 52px;
+    }
+
+    &--agreement {
+      margin: 37px 0 0;
+    }
+  }
+
+  .footer__nav-list {
+    margin-top: 0;
+    padding-left: 100px;
+  }
+
+  .footer__social-list {
+    margin-top: 21px;
+  }
+
+  .footer__call-button {
+    margin-top: 15px;
+  }
+}
