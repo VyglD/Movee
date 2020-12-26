@@ -1,3 +1,4 @@
+import {getOffers} from "./modules/backend";
 import {init as initMenu} from "./modules/menu";
 import {init as initCost} from "./modules/cost";
 import {init as initAutopark} from "./modules/autopark";
@@ -24,9 +25,14 @@ nodes
     }
   });
 
-initMenu();
-initCost();
-initAutopark();
-initReviews();
-initCallback();
-initMap();
+Promise.resolve(
+    getOffers()
+)
+  .then(({autopark, places}) => {
+    initMenu();
+    initCost(places);
+    initAutopark(autopark);
+    initReviews();
+    initCallback();
+    initMap();
+  });

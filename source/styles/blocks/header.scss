@@ -195,6 +195,8 @@ $nav-offset: 16px;
 @media (min-width: $tablet) {
   .header {
     flex-wrap: nowrap;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 
   .header:not(.header--no-js)::before {

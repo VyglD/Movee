@@ -58,6 +58,7 @@
 .autopark__type-button:not(.autopark__type-button--active):hover,
 .autopark__type-button:not(.autopark__type-button--active):focus {
   color: var(--color-yellow, yellow);
+  text-shadow: 1px 1px 3px var(--color-dark, black);
 }
 
 .autopark__type-button:not(.autopark__type-button--active):hover {

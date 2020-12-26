@@ -7,6 +7,8 @@ const htmlhint = require(`gulp-htmlhint`);
 const htmlValidator = require(`gulp-w3c-html-validator`);
 const htmlmin = require(`gulp-htmlmin`);
 const pug = require(`gulp-pug`);
+const fs = require(`fs`);
+const data = require(`gulp-data`);
 const pugLinter = require(`gulp-pug-linter`);
 const sourcemap = require(`gulp-sourcemaps`);
 const sass = require(`gulp-sass`);
@@ -106,6 +108,7 @@ gulp.task(`formatted-pictures`, () => {
 
 gulp.task(`markup`, () => {
   return gulp.src(`source/markup/pug/pages/*.pug`)
+    .pipe(data(() => JSON.parse(fs.readFileSync(`./source/static/server/offers.json`))))
     .pipe(pug())
     .pipe(
         gulpif(
@@ -202,11 +205,12 @@ gulp.task(`refresh`, () => {
 
 gulp.task(`server`, () => {
   server.init({
-    server: `build/`,
+    // server: `build/`,
+    // open: true,
+    // cors: true,
+    // ui: false,
+    proxy: `movee.ru`,
     notify: false,
-    open: true,
-    cors: true,
-    ui: false
   });
 
   gulp.watch(`source/markup/**/*.pug`).on(`all`, gulp.series(`markup`, `refresh`));
@@ -228,6 +232,8 @@ gulp.task(`server`, () => {
     copy(args);
     server.reload();
   });
+  gulp.watch(`source/static/**/*`)
+    .on(`all`, gulp.series(`markup`, `refresh`, `copy-static-files`));
 });
 
 gulp.task(`start`, gulp.series(`build`, `server`));

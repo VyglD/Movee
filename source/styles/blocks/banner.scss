@@ -80,6 +80,10 @@
 }
 
 @media (min-width: $tablet) {
+  .banner {
+    padding: 40px 30px;
+  }
+
   .banner::after {
     left: 60%;
     bottom: 0;

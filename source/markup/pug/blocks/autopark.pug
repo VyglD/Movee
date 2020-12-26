@@ -1,96 +1,8 @@
+//- autopark задано в offers.json
+
 -
-  const wagonOffers = [
-    {
-      id: "wagon-1",
-      title: "Газель 3 метра",
-      info: "Газель 3 метра / 1,5 тонны",
-      width: "2 м",
-      height: "2 м",
-      volume: "16 м³",
-      payload: "1,5 т",
-      img: "img/wagon.png",
-      imgWebp: "img/wagon.webp",
-    },
-    {
-      id: "wagon-2",
-      title: "Газель 3,5 метра",
-      info: "Газель 3,5 метра / 2 тонны",
-      width: "2 м",
-      height: "2,5 м",
-      volume: "18 м³",
-      payload: "2 т",
-      img: "img/wagon-reverse.png",
-      imgWebp: "img/wagon-reverse.webp",
-    },
-  ];
-
-  const carOffers = [
-    {
-      id: "car-1",
-      title: "Каблук 2 метра",
-      info: "Каблук 2 метра / 1 тонны",
-      width: "1,5 м",
-      height: "1,5 м",
-      volume: "10 м³",
-      payload: "800 кг",
-      img: "img/car.png",
-      imgWebp: "img/car.webp",
-    },
-  ];
-
-  const truckOffers = [
-    {
-      id: "truck-1",
-      title: "Грузовик 4 метра",
-      info: "Грузовик 4 метра / 3 тонны",
-      width: "2,5 м",
-      height: "2,5 м",
-      volume: "20 м³",
-      payload: "3 т",
-      img: "img/truck.png",
-      imgWebp: "img/truck.webp",
-    },
-    {
-      id: "truck-2",
-      title: "Грузовик 6 метра",
-      info: "Грузовик 6 метра / 10 тонн",
-      width: "4 м",
-      height: "4 м",
-      volume: "40 м³",
-      payload: "10 т",
-      img: "img/truck-reverse.png",
-      imgWebp: "img/truck-reverse.webp",
-    },
-    {
-      id: "truck-3",
-      title: "Грузовик 5 метра",
-      info: "Грузовик 5 метра / 8 тонн",
-      width: "4 м",
-      height: "3 м",
-      volume: "35 м³",
-      payload: "8 т",
-      img: "img/truck.png",
-      imgWebp: "img/truck.webp",
-    },
-  ];
-
-  const types = [
-    {
-      title: "Газели",
-      type: "wagon",
-      offers: wagonOffers
-    },
-    {
-      title: "Каблуки",
-      type: "car",
-      offers: carOffers
-    },
-    {
-      title: "Грузовики",
-      type: "truck",
-      offers: truckOffers
-    }
-  ];
+  const types = Object.entries(autopark)
+    .map(([type, {title, offers}]) => ({title, type, offers}))
 
 mixin types-list()
   ul(class="autopark__types-list autopark__types-list--no-js list-reset")
@@ -108,7 +20,7 @@ mixin slides-list(type)
     - for (let i = 0; i < type.offers.length; i++)
       li(
         class="autopark__slide autopark__slide--no-js"
-        data-slide=`${type.type}-${i + 1}`
+        data-slide=type.offers[i].id
       )
         article(class="autopark__offer")
           h3(class="autopark__offer-title").
@@ -158,7 +70,7 @@ mixin slides-controls(type)
           class="autopark__slide-button"
           type="button"
           aria-label=`Переключить на ${i + 1} слайд`
-          data-slide=`${type.type}-${i + 1}`
+          data-slide=type.offers[i].id
         )
 
 mixin sliders-list()
