@@ -1,5 +1,4 @@
 //- autopark задано в offers.json
-
 -
   const types = Object.entries(autopark)
     .map(([type, {title, offers}]) => ({title, type, offers}))
@@ -53,7 +52,7 @@ mixin slides-list(type)
               autopark__offer-order-button--no-js
               order-button
             `
-            href=`#order-${type.offers[i].id}`
+            href=`#callback`
           ).
             Заказать
 
@@ -106,11 +105,11 @@ mixin sliders-list()
       autopark__slider-order-button--no-js
       order-button
     `
-    href="#order"
+    href="#callback"
   ).
     Заказать
 
-section(class="autopark")
+section(class="autopark" id="autopark")
   h2(class="autopark__title").
     Автопарк
   p(class="autopark__subtitle").

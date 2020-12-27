@@ -1,43 +1,10 @@
+include ../mixins/callback-form.pug
+
 - const PHONE_PATTERN = "^((8|([\+]?7))([\-]| )?)?([\(]?[0-9]{3}[\)]?([\-]| )?)([0-9]|[\-]| ){7,10}$";
 
-section(class="callback")
+section(class="callback" id="callback")
   h2(class="callback__title").
     Закажи  переезд прямо сейчас
   p(class="callback__subtitle").
     Мы перезвоним в течении 10 секунд
-  form(class="callback__form" method="POST" action="https://echo.htmlacademy.ru/")
-    div(class="callback__form-field callback__form-field--no-js")
-      input(
-        type="text"
-        name="name"
-        id="callback-form-field-name"
-        placeholder="Иван Иванович"
-        required
-      )
-      label(for="callback-form-field-name").
-        Ваше имя
-    div(class="callback__form-field callback__form-field--no-js")
-      input(
-        type="tel"
-        name="phone"
-        id="callback-form-field-phone"
-        placeholder="+7 (999) 999 99 99"
-        pattern=PHONE_PATTERN
-        required
-      )
-      label(for="callback-form-field-phone").
-        Телефон
-    div(class="callback__submit-wrapper")
-      button(class="callback__submit action-button" type="submit")
-        span.
-          Перезвонить мне
-      div(class="callback__agrement")
-        input(
-          class="visually-hidden"
-          type="checkbox"
-          name="agrement"
-          id="callback-form-agrement"
-          checked
-        )
-        label(for="callback-form-agrement").
-          Даю согласие на обработку данных
+  +callback-form(`callback`)

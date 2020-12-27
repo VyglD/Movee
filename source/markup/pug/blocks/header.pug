@@ -3,7 +3,7 @@ mixin nav-item(link, text)
     a(class="header__nav-link" href=link).
       #{text}
 
-header(class="header header--no-js")
+header(class="header header--no-js" id="header")
   img(
     class="header__logo header__logo--no-js"
     src="img/logo.svg"
@@ -23,6 +23,6 @@ header(class="header header--no-js")
       +nav-item("#cost", "Цены")
       +nav-item("#autopark", "Автопарк")
       +nav-item("#reviews", "Отзывы")
-      +nav-item("#contacts", "Контакты")
+      +nav-item("#placement", "Контакты")
   a(class="header__telephone" href="tel:+78000801213").
     8(800)-080-12-13

@@ -26,12 +26,13 @@ footer(class="footer")
       ).
         Соглашение на обработку персональных данных
     li(class="footer__block")
-      ul(class="footer__nav-list list-reset")
-        +nav-item(`#main`, `Главная`)
-        +nav-item(`#cost`, `Цена`)
-        +nav-item(`#autopark`, `Автопарк`)
-        +nav-item(`#reviews`, `Отзывы`)
-        +nav-item(`#contacts`, `Контакты`)
+      nav
+        ul(class="footer__nav-list list-reset")
+          +nav-item(`#header`, `Главная`)
+          +nav-item(`#cost`, `Цена`)
+          +nav-item(`#autopark`, `Автопарк`)
+          +nav-item(`#reviews`, `Отзывы`)
+          +nav-item(`#placement`, `Контакты`)
     li(class="footer__block")
       +social-list(`footer__social-list`)
       a(

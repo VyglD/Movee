@@ -2,6 +2,7 @@
   box-sizing: border-box;
   display: flex;
   justify-content: center;
+  width: 100%;
   max-width: 100%;
   padding: 18px;
 
@@ -11,5 +12,6 @@
   line-height: 24px;
 
   background-color: $background-color;
+  border: none;
   outline: none;
 }

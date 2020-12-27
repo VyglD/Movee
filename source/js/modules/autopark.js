@@ -1,3 +1,5 @@
+import {getNextArrayIndex, getPreviousArrayIndex} from "./utils";
+
 const ActiveClass = {
   TYPE_BUTTON: `autopark__type-button--active`,
   SLIDER: `autopark__slider-wrapper--active`,
@@ -29,14 +31,6 @@ const isActivePackExist = () => {
     ActivePack[PackKey.SLIDER] &&
     ActivePack[PackKey.SLIDE] &&
     ActivePack[PackKey.SLIDE_BUTTON];
-};
-
-const getNextArrayIndex = (currentIndex, arr) => {
-  return (currentIndex + 1) % arr.length;
-};
-
-const getPreviousArrayIndex = (currentIndex, arr) => {
-  return (currentIndex + (arr.length - 1)) % arr.length;
 };
 
 const getElementByDataKey = (elements, dataKey, dataValue) => {

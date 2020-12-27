@@ -22,10 +22,14 @@ mixin offers-list()
               #{places[i].time}
           p(class="cost__offer-price").
             #{places[i].cost}
-          a(class="cost__offer-order-button order-button" href="#order").
+          a(
+            class="cost__offer-order-button order-button"
+            href="#callback"
+            data-offer-id=places[i].id
+          ).
             Заказать
 
-section(class="cost")
+section(class="cost" id="cost")
   h2(class="cost__title").
     Цены
   p(class="cost__subtitle").

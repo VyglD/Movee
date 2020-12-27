@@ -1,0 +1,37 @@
+mixin callback-form(modificator)
+  form(class="callback-form" method="POST" action="https://echo.htmlacademy.ru/")
+    div(class="callback-form__field callback-form__field--no-js")
+      input(
+        type="text"
+        name="name"
+        id=`callback-form-field-name-${modificator}`
+        placeholder="Иван Иванович"
+        required
+      )
+      label(for=`callback-form-field-name-${modificator}`).
+        Ваше имя
+    div(class="callback-form__field callback-form__field--no-js")
+      input(
+        type="tel"
+        name="phone"
+        id=`callback-form-field-phone-${modificator}`
+        placeholder="+7 (999) 999 99 99"
+        pattern=PHONE_PATTERN
+        required
+      )
+      label(for=`callback-form-field-phone-${modificator}`).
+        Телефон
+    div(class="callback-form__submit-wrapper")
+      button(class="callback-form__submit action-button" type="submit")
+        span.
+          Перезвонить мне
+      div(class="callback-form__agrement")
+        input(
+          class="visually-hidden"
+          type="checkbox"
+          name="agrement"
+          id=`callback-form-agrement-${modificator}`
+          checked
+        )
+        label(for=`callback-form-agrement-${modificator}`).
+          Даю согласие на обработку данных

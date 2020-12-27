@@ -1,4 +1,5 @@
 import {getOffers} from "./modules/backend";
+import {getPopupChanger} from "./modules/popup";
 import {init as initMenu} from "./modules/menu";
 import {init as initCost} from "./modules/cost";
 import {init as initAutopark} from "./modules/autopark";
@@ -8,9 +9,7 @@ import {init as initMap} from "./modules/map";
 
 const NO_JS_MODIFICATOR = `--no-js`;
 
-const nodes = Array.from(document.querySelectorAll(`*`));
-
-nodes
+Array.from(document.querySelectorAll(`*`))
   .forEach((node) => {
     if (
       node.className &&
@@ -29,9 +28,11 @@ Promise.resolve(
     getOffers()
 )
   .then(({autopark, places}) => {
+    const showPopup = getPopupChanger();
+
     initMenu();
-    initCost(places);
-    initAutopark(autopark);
+    initCost(places, showPopup);
+    initAutopark(autopark, showPopup);
     initReviews();
     initCallback();
     initMap();

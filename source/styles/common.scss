@@ -52,8 +52,13 @@ label {
   cursor: pointer;
 }
 
+
 /*
-  Classes
+
+
+    Classes
+
+
 */
 
 
@@ -81,4 +86,34 @@ input[type="radio"].visually-hidden {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.disable-scroll {
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+
+  overflow: hidden;
+}
+
+
+/*
+
+
+    Animations
+
+
+*/
+
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100vh);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }

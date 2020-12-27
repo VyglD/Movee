@@ -46,58 +46,55 @@ const setEventListeners = (input) => {
 };
 
 const init = () => {
-  const callbackContainer = document.querySelector(`.callback`);
+  const forms = document.querySelectorAll(`.callback-form`);
 
-  if (callbackContainer) {
-    const callbackForm = callbackContainer.querySelector(`.callback__form`);
-    const phoneInput = callbackContainer.querySelector(
-        `.callback__form-field input[name="phone"]`
-    );
-    const nameInput = callbackContainer.querySelector(
-        `.callback__form-field input[name="name"]`
-    );
-    const submitButton = callbackContainer.querySelector(`.callback__submit`);
-    const agrementButton = callbackContainer.querySelector(`.callback__agrement input`);
+  if (forms) {
+    forms.forEach((form) => {
+      const phoneInput = form.querySelector(`input[name="phone"]`);
+      const nameInput = form.querySelector(`input[name="name"]`);
+      const submitButton = form.querySelector(`.callback-form__submit`);
+      const agrementButton = form.querySelector(`.callback-form__agrement input`);
 
-    if (phoneInput && nameInput && submitButton) {
-      phoneMask.mask(phoneInput);
-      setEventListeners(nameInput);
-      setEventListeners(phoneInput);
+      if (phoneInput && nameInput && submitButton) {
+        phoneMask.mask(phoneInput);
+        setEventListeners(nameInput);
+        setEventListeners(phoneInput);
 
-      submitButton.addEventListener(`click`, (evt) => {
-        if (
-          isValidField(nameInput.value.length > 0, nameInput) &&
-          isValidField(PHONE_REGEX.test(phoneInput.value), phoneInput)
-        ) {
-          evt.preventDefault();
+        submitButton.addEventListener(`click`, (evt) => {
+          if (
+            isValidField(nameInput.value.length > 0, nameInput) &&
+            isValidField(PHONE_REGEX.test(phoneInput.value), phoneInput)
+          ) {
+            evt.preventDefault();
 
-          fetch(URL, {
-            method: `POST`,
-            headers: {
-              'Content-Type': `application/json;charset=utf-8`
-            },
-            body: {
-              name: nameInput.value,
-              phone: phoneInput.value,
-            }
-          })
-            .then((response) => {
-              // показа попапа
-              window.console.log(response);
+            fetch(URL, {
+              method: `POST`,
+              headers: {
+                'Content-Type': `application/json;charset=utf-8`
+              },
+              body: {
+                name: nameInput.value,
+                phone: phoneInput.value,
+              }
             })
-            .catch((err) => {
-              window.console.error(err);
-            });
-        }
+              .then((response) => {
+                // показа попапа
+                window.console.log(response);
+              })
+              .catch((err) => {
+                window.console.error(err);
+              });
+          }
+        });
+      }
+
+      form.addEventListener(`submit`, (evt) => {
+        evt.preventDefault();
       });
-    }
 
-    callbackForm.addEventListener(`submit`, (evt) => {
-      evt.preventDefault();
-    });
-
-    agrementButton.addEventListener(`click`, () => {
-      submitButton.disabled = !agrementButton.checked;
+      agrementButton.addEventListener(`click`, () => {
+        submitButton.disabled = !agrementButton.checked;
+      });
     });
   }
 };

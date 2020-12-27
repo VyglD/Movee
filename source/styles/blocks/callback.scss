@@ -1,12 +1,4 @@
-$callback-max-width: 300px;
-$callback-input-border-size: 1px;
-
 .callback {
-  --callback-line-height: 20px;
-  --callback-line-height-small: 12px;
-  --callback-font-size: 16px;
-  --callback-font-size-small: 9px;
-
   padding: $offset;
   padding-bottom: 71px;
 }
@@ -29,157 +21,6 @@ $callback-input-border-size: 1px;
   text-align: center;
 }
 
-.callback__form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-top: 51px;
-}
-
-.callback__form-field {
-  position: relative;
-
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  width: 100%;
-  max-width: $callback-max-width;
-  margin-bottom: 41px;
-}
-
-.callback__form-field input,
-.callback__form-field label {
-  width: 100%;
-  margin-right: auto;
-
-  color: var(--color-dark, black);
-  font-weight: 500;
-  font-size: var(--callback-font-size);
-  line-height: var(--callback-line-height);
-}
-
-.callback__form-field input {
-  box-sizing: border-box;
-  display: block;
-  width: 100%;
-  height: 0;
-  max-width: $callback-max-width;
-  padding: 0 5px;
-
-  border: none;
-  border-bottom: $callback-input-border-size solid var(--color-dark, black);
-  outline: none;
-  overflow: hidden;
-}
-
-.callback__form-field input[name="name"] {
-  text-transform: capitalize;
-}
-
-.callback__form-field input:focus,
-.callback__form-field--no-js input,
-.callback__form-field--visible input {
-  height: var(--callback-line-height);
-  margin-top: $callback-input-border-size;
-}
-
-.callback__form-field input:hover,
-.callback__form-field input:focus {
-  border-color: var(--color-yellow, yellow);
-}
-
-.callback__form-field:not(.callback__form-field--no-js) input:focus + label,
-.callback__form-field--visible label {
-  padding-bottom: 0;
-
-  font-size: var(--callback-font-size-small);
-  line-height: var(--callback-line-height-small);
-}
-
-.callback__form-field label {
-  display: block;
-  margin-left: 2px;
-  padding-bottom: var(--callback-line-height-small);
-
-  cursor: pointer;
-
-  transition: font-size $duration;
-}
-
-.callback__form-field input:hover + label {
-  color: var(--color-yellow, yellow);
-}
-
-.callback__submit-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.callback__submit {
-  --button-stroke-color: var(--color-yellow, yellow);
-
-  width: 100%;
-  max-width: $callback-max-width;
-  margin-top: 18px;
-  padding: 0;
-
-  background-color: transparent;
-  border: none;
-}
-
-.callback__agrement {
-  width: 100%;
-  max-width: $callback-max-width;
-}
-
-.callback__agrement label {
-  display: flex;
-  align-items: center;
-  margin-top: 15px;
-  margin-left: 3px;
-
-  font-size: 12px;
-  line-height: 15px;
-  letter-spacing: 0.015em;
-}
-
-.callback__agrement label::before {
-  content: "";
-
-  flex-shrink: 0;
-  box-sizing: border-box;
-  display: block;
-  width: 15px;
-  height: 15px;
-  margin-right: 10px;
-
-  border-radius: 2px;
-  border: 2px solid var(--color-dark, black);
-}
-
-.callback__agrement input:hover + label,
-.callback__agrement input:focus + label {
-  color: var(--color-yellow, yellow);
-}
-
-.callback__agrement input:hover + label {
-  text-decoration: underline;
-}
-
-.callback__agrement input:hover + label::before,
-.callback__agrement input:focus + label::before {
-  border-color: var(--color-yellow, yellow);
-}
-
-.callback__agrement input:checked + label::before {
-  background-image: url("../img/check.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
 @media (min-width: $tablet) {
   .callback__title {
     font-weight: 600;
@@ -191,36 +32,6 @@ $callback-input-border-size: 1px;
     font-weight: 400;
     font-size: 16px;
     line-height: 21px;
-  }
-
-  .callback__form {
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .callback__form-field {
-    width: 40%;
-    margin-right: 70px;
-  }
-
-  .callback__submit-wrapper,
-  .callback__submit {
-    max-width: 250px;
-  }
-
-  .callback__submit span {
-    font-size: 20px;
-  }
-
-  .callback__agrement label {
-    margin-left: 0;
-  }
-
-  .callback__agrement label::before {
-    margin-right: 6px;
   }
 }
 
@@ -236,26 +47,5 @@ $callback-input-border-size: 1px;
   .callback__subtitle {
     text-align: left;
     padding: 0;
-  }
-
-  .callback__form {
-    justify-content: start;
-    margin-top: 16px;
-  }
-
-  .callback__form-field {
-    margin-bottom: 0;
-  }
-
-  .callback__submit span {
-    padding: 13px;
-
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
-  }
-
-  .callback__agrement label {
-    margin-top: 22px;
   }
 }

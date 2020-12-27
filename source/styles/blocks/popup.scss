@@ -1,0 +1,95 @@
+$popup-cross-size: 50px;
+$popup-cross-width: 4px;
+
+.popup {
+  display: none;
+
+  &--opened {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 100vh;
+    padding: 10px;
+
+    cursor: pointer;
+    background-color: var(--color-gray-4, gray);
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+.popup__content {
+  position: relative;
+
+  box-sizing: border-box;
+  display: block;
+  width: 85%;
+  max-width: 1100px;
+  padding: 30px;
+
+  cursor: default;
+  background-color: var(--color-white, white);
+
+  animation: fall #{$duration} forwards;
+}
+
+.popup__close-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  display: block;
+  width: $popup-cross-size;
+  height: $popup-cross-size;
+
+  background-color: transparent;
+  border: none;
+}
+
+.popup__close-button::before,
+.popup__close-button::after {
+  content: "";
+
+  display: block;
+  width: 100%;
+  height: $popup-cross-width;
+
+  background-color: var(--color-dark, black);
+}
+
+.popup__close-button::before {
+  transform: rotate(45deg);
+}
+
+.popup__close-button::after {
+  margin-top: #{-$popup-cross-width};
+
+  transform: rotate(-45deg);
+}
+
+.popup__close-button:hover::before,
+.popup__close-button:focus::before,
+.popup__close-button:hover::after,
+.popup__close-button:focus::after {
+  background-color: var(--color-yellow, yellow);
+}
+
+.popup__close-button:hover::before,
+.popup__close-button:hover::after {
+  box-shadow: 0 0 0 1px var(--color-dark, black);
+}
+
+.popup__close-button:active::before,
+.popup__close-button:active::after {
+  opacity: 0.5;
+}

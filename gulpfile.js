@@ -76,10 +76,7 @@ gulp.task(`test-pug`, () => {
 });
 
 gulp.task(`test-html`, () => {
-  return gulp.src([
-    `source/markup/**/*.html`,
-    `build/*.html`
-  ])
+  return gulp.src(`build/*.html`)
     .pipe(plumber())
     .pipe(htmlhint(`.htmlhintrc`))
     .pipe(htmlhint.reporter())

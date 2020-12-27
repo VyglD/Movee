@@ -1,3 +1,7 @@
+import {createElement} from "./utils";
+
+const MAP_CONTAINER_TEMPLATE = `<div class="placement__map" id="map"></div>`;
+
 const MapScript = document.createElement(`script`);
 MapScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDdxiZ8JD-Awc3VOchAbkcA54-XHZJYkGY&callback=initMap`;
 MapScript.defer = true;
@@ -41,11 +45,7 @@ const initMap = () => {
 };
 
 const createMap = (container) => {
-  const wrapper = document.createElement(`div`);
-
-  wrapper.innerHTML = `<div class="placement__map" id="map"></div>`;
-
-  container.replaceChildren(wrapper.firstElementChild);
+  container.replaceChildren(createElement(MAP_CONTAINER_TEMPLATE));
 
   window.initMap = initMap;
 

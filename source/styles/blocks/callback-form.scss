@@ -1,0 +1,213 @@
+$callback-max-width: 300px;
+$callback-input-border-size: 1px;
+
+.callback-form {
+  --callback-line-height: 20px;
+  --callback-line-height-small: 12px;
+  --callback-font-size: 16px;
+  --callback-font-size-small: 9px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 51px;
+}
+
+.callback-form__field {
+  position: relative;
+
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  width: 100%;
+  max-width: $callback-max-width;
+  margin-bottom: 41px;
+}
+
+.callback-form__field input,
+.callback-form__field label {
+  width: 100%;
+  margin-right: auto;
+
+  color: var(--color-dark, black);
+  font-weight: 500;
+  font-size: var(--callback-font-size);
+  line-height: var(--callback-line-height);
+}
+
+.callback-form__field input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: 0;
+  max-width: $callback-max-width;
+  padding: 0 5px;
+
+  border: none;
+  border-bottom: $callback-input-border-size solid var(--color-dark, black);
+  outline: none;
+  overflow: hidden;
+}
+
+.callback-form__field input[name="name"] {
+  text-transform: capitalize;
+}
+
+.callback-form__field input:focus,
+.callback-form__field--no-js input,
+.callback-form__field--visible input {
+  height: var(--callback-line-height);
+  margin-top: $callback-input-border-size;
+}
+
+.callback-form__field input:hover,
+.callback-form__field input:focus {
+  border-color: var(--color-yellow, yellow);
+}
+
+.callback-form__field:not(.callback-form__field--no-js) input:focus + label,
+.callback-form__field--visible label {
+  padding-bottom: 0;
+
+  font-size: var(--callback-font-size-small);
+  line-height: var(--callback-line-height-small);
+}
+
+.callback-form__field label {
+  display: block;
+  margin-left: 2px;
+  padding-bottom: var(--callback-line-height-small);
+
+  cursor: pointer;
+
+  transition: font-size $duration;
+}
+
+.callback-form__field input:hover + label {
+  color: var(--color-yellow, yellow);
+}
+
+.callback-form__submit-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.callback-form__submit {
+  --button-stroke-color: var(--color-yellow, yellow);
+
+  width: 100%;
+  max-width: $callback-max-width;
+  margin-top: 18px;
+  padding: 0;
+
+  background-color: transparent;
+  border: none;
+}
+
+.callback-form__agrement {
+  width: 100%;
+  max-width: $callback-max-width;
+}
+
+.callback-form__agrement label {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  margin-left: 3px;
+
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0.015em;
+}
+
+.callback-form__agrement label::before {
+  content: "";
+
+  flex-shrink: 0;
+  box-sizing: border-box;
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+
+  border-radius: 2px;
+  border: 2px solid var(--color-dark, black);
+}
+
+.callback-form__agrement input:hover + label,
+.callback-form__agrement input:focus + label {
+  color: var(--color-yellow, yellow);
+}
+
+.callback-form__agrement input:hover + label {
+  text-decoration: underline;
+}
+
+.callback-form__agrement input:hover + label::before,
+.callback-form__agrement input:focus + label::before {
+  border-color: var(--color-yellow, yellow);
+}
+
+.callback-form__agrement input:checked + label::before {
+  background-image: url("../img/check.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media (min-width: $tablet) {
+  .callback-form {
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .callback-form__field {
+    width: 40%;
+    margin-right: 70px;
+  }
+
+  .callback-form__submit-wrapper,
+  .callback-form__submit {
+    max-width: 250px;
+  }
+
+  .callback-form__submit span {
+    font-size: 20px;
+  }
+
+  .callback-form__agrement label {
+    margin-left: 0;
+  }
+
+  .callback-form__agrement label::before {
+    margin-right: 6px;
+  }
+}
+
+@media (min-width: $desktop) {
+  .callback-form {
+    justify-content: start;
+    margin-top: 16px;
+  }
+
+  .callback-form__field {
+    margin-bottom: 0;
+  }
+
+  .callback-form__submit span {
+    padding: 13px;
+
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .callback-form__agrement label {
+    margin-top: 22px;
+  }
+}

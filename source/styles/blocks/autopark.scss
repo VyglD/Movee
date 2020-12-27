@@ -57,12 +57,15 @@
 
 .autopark__type-button:not(.autopark__type-button--active):hover,
 .autopark__type-button:not(.autopark__type-button--active):focus {
-  color: var(--color-yellow, yellow);
-  text-shadow: 1px 1px 3px var(--color-dark, black);
+  border-color: var(--color-red, red);
 }
 
 .autopark__type-button:not(.autopark__type-button--active):hover {
-  border-color: var(--color-red, red);
+  text-decoration: underline;
+}
+
+.autopark__type-button:not(.autopark__type-button--active):focus {
+  text-decoration: none;
 }
 
 .autopark__type-button:not(.autopark__type-button--active):active {
