@@ -5,22 +5,7 @@ import {
   createElement
 } from "./utils";
 
-const createInfoBlock = (offer) => {
-  const template = `
-    <div class="info-block">
-      <p class="info-block__title">
-        Вы выбрали услугу «Переезд
-        <span class="info-block__title-highlight">${offer.info}</span>»
-      </p>
-      <p class="info-block__form-title">
-        Для подтвеждения заявки оставьте свои данные
-         и мы свяжемся с вами в ближайшее время
-      </p>
-    </div>
-  `;
-
-  return createElement(template);
-};
+const ANIMATION_MODIFICATOR = `--animation`;
 
 const CustomClass = {
   ORDER_BUTTON: `autopark__offer-order-button`,
@@ -32,6 +17,13 @@ const ActiveClass = {
   SLIDER: `autopark__slider-wrapper--active`,
   SLIDE: `autopark__slide--active`,
   SLIDE_BUTTON: `autopark__slide-button--active`,
+};
+
+const AnimationClass = {
+  IN_LEFT: `autopark__slide${ANIMATION_MODIFICATOR}-fadeinLeft`,
+  IN_RIGHT: `autopark__slide${ANIMATION_MODIFICATOR}-fadeInRight`,
+  OUT_LEFT: `autopark__slide${ANIMATION_MODIFICATOR}-fadeOutLeft`,
+  OUT_RIGHT: `autopark__slide${ANIMATION_MODIFICATOR}-fadeOutRight`,
 };
 
 const DataKey = {
@@ -51,6 +43,23 @@ const ActivePack = {
   [PackKey.SLIDER]: null,
   [PackKey.SLIDE]: null,
   [PackKey.SLIDE_BUTTON]: null,
+};
+
+const createInfoBlock = (offer) => {
+  const template = `
+    <div class="info-block">
+      <p class="info-block__title">
+        Вы выбрали услугу «Переезд
+        <span class="info-block__title-highlight">${offer.info}</span>»
+      </p>
+      <p class="info-block__form-title">
+        Для подтвеждения заявки оставьте свои данные
+        и мы свяжемся с вами в ближайшее время
+      </p>
+    </div>
+  `;
+
+  return createElement(template);
 };
 
 const isActivePackExist = () => {
@@ -88,14 +97,24 @@ const setActiveButton = (button, activeButtonClass, packKey) => {
   button.disabled = true;
 };
 
-const setActiveSlide = (slide, slideButton) => {
+const setActiveSlide = (slide, slideButton, animationName = ``) => {
   setActiveElement(slide, ActiveClass.SLIDE, PackKey.SLIDE);
   setActiveButton(slideButton, ActiveClass.SLIDE_BUTTON, PackKey.SLIDE_BUTTON);
+
+  if (animationName) {
+    slide.classList.add(animationName);
+  }
 };
 
 const canselActiveSlide = () => {
   canselActiveElement(ActivePack[PackKey.SLIDE], ActiveClass.SLIDE);
   canselActiveButton(ActivePack[PackKey.SLIDE_BUTTON], ActiveClass.SLIDE_BUTTON);
+
+  Array.from(ActivePack[PackKey.SLIDE].classList)
+    .filter((className) => className.indexOf(ANIMATION_MODIFICATOR) !== -1)
+    .forEach((className) => {
+      ActivePack[PackKey.SLIDE].classList.remove(className);
+    });
 };
 
 const setActiveType = (typeButton, slider, slide, slideButton) => {
@@ -112,7 +131,7 @@ const canselActiveType = () => {
   }
 };
 
-const getSwitchBtnClickHandler = (slides, slideButtons, getNewIndex) => {
+const getSwitchBtnClickHandler = (slides, slideButtons, getNewIndex, animationName) => {
   return () => {
     const activeSlideIndex = slides.findIndex((node) => node === ActivePack[PackKey.SLIDE]);
     const newSlideIndex = getNewIndex(activeSlideIndex, slides);
@@ -126,15 +145,15 @@ const getSwitchBtnClickHandler = (slides, slideButtons, getNewIndex) => {
       );
 
       canselActiveSlide();
-      setActiveSlide(newSlide, newSlideButton);
+      setActiveSlide(newSlide, newSlideButton, animationName);
     }
   };
 };
 
-const setSwitchBtnClickHandler = (slides, slideBts, getNewIndex, switchBtn) => {
+const setSwitchBtnClickHandler = (slides, slideBts, getNewIndex, switchBtn, animationName) => {
   switchBtn.addEventListener(
       `click`,
-      getSwitchBtnClickHandler(slides, slideBts, getNewIndex)
+      getSwitchBtnClickHandler(slides, slideBts, getNewIndex, animationName)
   );
 };
 
@@ -222,8 +241,20 @@ const init = (serverOffers, showPopup) => {
             prevButton.remove();
             nextButton.remove();
           } else {
-            setSwitchBtnClickHandler(slides, slideButtons, getPreviousArrayIndex, prevButton);
-            setSwitchBtnClickHandler(slides, slideButtons, getNextArrayIndex, nextButton);
+            setSwitchBtnClickHandler(
+                slides,
+                slideButtons,
+                getPreviousArrayIndex,
+                prevButton,
+                AnimationClass.IN_RIGHT
+            );
+            setSwitchBtnClickHandler(
+                slides,
+                slideButtons,
+                getNextArrayIndex,
+                nextButton,
+                AnimationClass.IN_LEFT
+            );
           }
 
           if (index === 0) {

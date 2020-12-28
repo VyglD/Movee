@@ -144,6 +144,24 @@
     opacity: 1;
     visibility: visible;
   }
+
+  &--animation {
+    &-fadeinLeft {
+      animation: fadeInLeft $duration forwards;
+    }
+
+    &-fadeInRight {
+      animation: fadeInRight $duration forwards;
+    }
+
+    &-fadeOutLeft {
+      animation: fadeOutLeft $duration forwards;
+    }
+
+    &-fadeOutRight {
+      animation: fadeOutRight $duration forwards;
+    }
+  }
 }
 
 .autopark__offer {
