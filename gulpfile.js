@@ -230,7 +230,7 @@ gulp.task(`server`, () => {
     server.reload();
   });
   gulp.watch(`source/static/**/*`)
-    .on(`all`, gulp.series(`markup`, `refresh`, `copy-static-files`));
+    .on(`all`, gulp.series(`copy-static-files`, `markup`, `refresh`));
 });
 
 gulp.task(`start`, gulp.series(`build`, `server`));

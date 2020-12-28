@@ -12,6 +12,10 @@ $callback-input-border-size: 1px;
   align-items: center;
   width: 100%;
   margin-top: 51px;
+
+  &--hidden {
+    display: none;
+  }
 }
 
 .callback-form__field {
@@ -66,14 +70,6 @@ $callback-input-border-size: 1px;
   border-color: var(--color-yellow, yellow);
 }
 
-.callback-form__field:not(.callback-form__field--no-js) input:focus + label,
-.callback-form__field--visible label {
-  padding-bottom: 0;
-
-  font-size: var(--callback-font-size-small);
-  line-height: var(--callback-line-height-small);
-}
-
 .callback-form__field label {
   display: block;
   margin-left: 2px;
@@ -82,6 +78,14 @@ $callback-input-border-size: 1px;
   cursor: pointer;
 
   transition: font-size $duration;
+}
+
+.callback-form__field:not(.callback-form__field--no-js) input:focus + label,
+.callback-form__field--visible label {
+  padding-bottom: 0;
+
+  font-size: var(--callback-font-size-small);
+  line-height: var(--callback-line-height-small);
 }
 
 .callback-form__field input:hover + label {

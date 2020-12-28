@@ -28,12 +28,12 @@ Promise.resolve(
     getOffers()
 )
   .then(({autopark, places}) => {
-    const showPopup = getPopupChanger();
+    const {showPopup, showPopupWithoutCallbackForm} = getPopupChanger();
 
     initMenu();
     initCost(places, showPopup);
     initAutopark(autopark, showPopup);
     initReviews();
-    initCallback();
+    initCallback(showPopupWithoutCallbackForm);
     initMap();
   });

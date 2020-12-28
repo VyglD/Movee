@@ -1,10 +1,29 @@
 import Inputmask from "inputmask";
+import {postCallbackForm} from "./backend";
+import {createElement} from "./utils";
 
 const VISIBLE_CLASS = `callback-form__field--visible`;
-const URL = `https://echo.htmlacademy.ru/`;
 const PHONE_REGEX = /^((8|([\+]?7))([\-]| )?)?([\(]?[0-9]{3}[\)]?([\-]| )?)([0-9]|[\-]| ){7,10}$/u;
 
 const phoneMask = new Inputmask({mask: `+7 (999) 999-99-99`, placeholder: `X`});
+
+const createInfoBlock = (info) => {
+  const template = `
+    <div class="info-block">
+      <p class="info-block__title">
+        <span class="info-block__title-highlight">${info.name}</span>,
+        спасибо, что выбрали нашу компанию
+      </p>
+      <p class="info-block__title">
+        Мы свяжемся с вами по номеру
+        <span class="info-block__title-highlight">${info.phone}</span>
+        в ближайшее время.
+      </p>
+    </div>
+  `;
+
+  return createElement(template);
+};
 
 const isValidField = (trueCondition, field) => {
   let isValid = true;
@@ -45,7 +64,7 @@ const setEventListeners = (input) => {
   input.addEventListener(`blur`, fieldBlurHandler);
 };
 
-const init = () => {
+const init = (showPopup) => {
   const forms = document.querySelectorAll(`.callback-form`);
 
   if (forms) {
@@ -67,22 +86,15 @@ const init = () => {
           ) {
             evt.preventDefault();
 
-            fetch(URL, {
-              method: `POST`,
-              headers: {
-                'Content-Type': `application/json;charset=utf-8`
-              },
-              body: {
-                name: nameInput.value,
-                phone: phoneInput.value,
-              }
-            })
+            postCallbackForm(JSON.stringify({
+              name: nameInput.value,
+              phone: phoneInput.value,
+            }))
               .then((response) => {
-                // показа попапа
-                window.console.log(response);
-              })
-              .catch((err) => {
-                window.console.error(err);
+                showPopup(createInfoBlock(response));
+
+                nameInput.value = ``;
+                phoneInput.value = ``;
               });
           }
         });

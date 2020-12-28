@@ -33,6 +33,16 @@ const getOffers = () => {
     .then(toJSON);
 };
 
+const postCallbackForm = (data) => {
+  return load({
+    url: `callback.php`,
+    method: Method.POST,
+    body: data,
+  })
+    .then(toJSON);
+};
+
 export {
   getOffers,
+  postCallbackForm,
 };
