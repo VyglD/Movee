@@ -61,11 +61,7 @@
 }
 
 .autopark__type-button:not(.autopark__type-button--active):hover {
-  text-decoration: underline;
-}
-
-.autopark__type-button:not(.autopark__type-button--active):focus {
-  text-decoration: none;
+  color: var(--color-yellow, yellow);
 }
 
 .autopark__type-button:not(.autopark__type-button--active):active {

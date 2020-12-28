@@ -1,4 +1,31 @@
-import {getNextArrayIndex, getPreviousArrayIndex} from "./utils";
+import {
+  getNextArrayIndex,
+  getPreviousArrayIndex,
+  createOrderButton,
+  createElement
+} from "./utils";
+
+const createInfoBlock = (offer) => {
+  const template = `
+    <div class="info-block">
+      <p class="info-block__title">
+        Вы выбрали услугу «Переезд
+        <span class="info-block__title-highlight">${offer.info}</span>»
+      </p>
+      <p class="info-block__form-title">
+        Для подтвеждения заявки оставьте свои данные
+         и мы свяжемся с вами в ближайшее время
+      </p>
+    </div>
+  `;
+
+  return createElement(template);
+};
+
+const CustomClass = {
+  ORDER_BUTTON: `autopark__offer-order-button`,
+  SLIDER_ORDER_BUTTON: `autopark__slider-order-button`,
+};
 
 const ActiveClass = {
   TYPE_BUTTON: `autopark__type-button--active`,
@@ -111,60 +138,100 @@ const setSwitchBtnClickHandler = (slides, slideBts, getNewIndex, switchBtn) => {
   );
 };
 
-const init = () => {
-  let typeButtons = document.querySelectorAll(`.autopark__type-button`);
-  let sliders = document.querySelectorAll(`.autopark__slider-wrapper`);
+const init = (serverOffers, showPopup) => {
+  const autopark = document.querySelector(`.autopark`);
+  if (autopark) {
+    const orderButtons = autopark.querySelectorAll(`.${CustomClass.ORDER_BUTTON}`);
+    const sliderOrderButton = autopark.querySelector(`.${CustomClass.SLIDER_ORDER_BUTTON}`);
+    let typeButtons = autopark.querySelectorAll(`.autopark__type-button`);
+    let sliders = autopark.querySelectorAll(`.autopark__slider-wrapper`);
 
-  if (typeButtons && sliders) {
-    typeButtons = Array.from(typeButtons);
-    sliders = Array.from(sliders);
+    const offers = new Map(
+        Object.entries(serverOffers).map(([_type, {offers: tempOffers}]) => {
+          return tempOffers.map((offer) => [offer.id, offer]);
+        }).reduce((result, element) => {
+          result.push(...element);
+          return result;
+        }, [])
+    );
 
-    sliders.forEach((slider, index) => {
-      const typeButton = getElementByDataKey(typeButtons, DataKey.TYPE, slider.dataset[DataKey.TYPE]);
-      const prevButton = slider.querySelector(`.autopark__slider-switch-button--previous`);
-      const nextButton = slider.querySelector(`.autopark__slider-switch-button--next`);
+    if (orderButtons && sliderOrderButton) {
+      const newSliderOrderButton = createOrderButton(CustomClass.SLIDER_ORDER_BUTTON);
 
-      let slides = slider.querySelectorAll(`.autopark__slide`);
-      let slideButtons = slider.querySelectorAll(`.autopark__slide-button`);
+      newSliderOrderButton.addEventListener(`click`, () => {
+        const activeSlider = autopark.querySelector(
+            `.${ActiveClass.SLIDER} .${ActiveClass.SLIDE}`
+        );
 
-      if (typeButton && prevButton && nextButton && slides && slideButtons) {
-        slides = Array.from(slides);
-        slideButtons = Array.from(slideButtons);
+        if (activeSlider) {
+          showPopup(createInfoBlock(offers.get(activeSlider.dataset[DataKey.SLIDE])));
+        }
+      });
 
-        typeButton.addEventListener(`click`, () => {
-          canselActiveType();
-          setActiveType(typeButton, slider, slides[0], slideButtons[0]);
+      sliderOrderButton.replaceWith(newSliderOrderButton);
+
+      orderButtons.forEach((button) => {
+        const newButton = createOrderButton(CustomClass.ORDER_BUTTON);
+
+        newButton.addEventListener(`click`, () => {
+          showPopup(createInfoBlock(offers.get(button.dataset[`offerId`])));
         });
 
-        slideButtons.forEach((btn) => {
-          btn.addEventListener(`click`, (evt) => {
-            if (evt.target !== ActivePack[PackKey.SLIDE_BUTTON]) {
-              const newSlideButton = evt.target;
-              const newSlide = getElementByDataKey(
-                  slides,
-                  DataKey.SLIDE,
-                  newSlideButton.dataset[DataKey.SLIDE]
-              );
+        button.replaceWith(newButton);
+      });
+    }
 
-              canselActiveSlide();
-              setActiveSlide(newSlide, newSlideButton);
-            }
+    if (typeButtons && sliders) {
+      typeButtons = Array.from(typeButtons);
+      sliders = Array.from(sliders);
+
+      sliders.forEach((slider, index) => {
+        const typeButton = getElementByDataKey(typeButtons, DataKey.TYPE, slider.dataset[DataKey.TYPE]);
+        const prevButton = slider.querySelector(`.autopark__slider-switch-button--previous`);
+        const nextButton = slider.querySelector(`.autopark__slider-switch-button--next`);
+
+        let slides = slider.querySelectorAll(`.autopark__slide`);
+        let slideButtons = slider.querySelectorAll(`.autopark__slide-button`);
+
+        if (typeButton && prevButton && nextButton && slides && slideButtons) {
+          slides = Array.from(slides);
+          slideButtons = Array.from(slideButtons);
+
+          typeButton.addEventListener(`click`, () => {
+            canselActiveType();
+            setActiveType(typeButton, slider, slides[0], slideButtons[0]);
           });
-        });
 
-        if (slides.length === 1) {
-          prevButton.remove();
-          nextButton.remove();
-        } else {
-          setSwitchBtnClickHandler(slides, slideButtons, getPreviousArrayIndex, prevButton);
-          setSwitchBtnClickHandler(slides, slideButtons, getNextArrayIndex, nextButton);
-        }
+          slideButtons.forEach((btn) => {
+            btn.addEventListener(`click`, (evt) => {
+              if (evt.target !== ActivePack[PackKey.SLIDE_BUTTON]) {
+                const newSlideButton = evt.target;
+                const newSlide = getElementByDataKey(
+                    slides,
+                    DataKey.SLIDE,
+                    newSlideButton.dataset[DataKey.SLIDE]
+                );
 
-        if (index === 0) {
-          setActiveType(typeButton, slider, slides[0], slideButtons[0]);
+                canselActiveSlide();
+                setActiveSlide(newSlide, newSlideButton);
+              }
+            });
+          });
+
+          if (slides.length === 1) {
+            prevButton.remove();
+            nextButton.remove();
+          } else {
+            setSwitchBtnClickHandler(slides, slideButtons, getPreviousArrayIndex, prevButton);
+            setSwitchBtnClickHandler(slides, slideButtons, getNextArrayIndex, nextButton);
+          }
+
+          if (index === 0) {
+            setActiveType(typeButton, slider, slides[0], slideButtons[0]);
+          }
         }
-      }
-    });
+      });
+    }
   }
 };
 

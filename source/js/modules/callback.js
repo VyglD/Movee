@@ -1,6 +1,6 @@
 import Inputmask from "inputmask";
 
-const VISIBLE_CLASS = `callback__form-field--visible`;
+const VISIBLE_CLASS = `callback-form__field--visible`;
 const URL = `https://echo.htmlacademy.ru/`;
 const PHONE_REGEX = /^((8|([\+]?7))([\-]| )?)?([\(]?[0-9]{3}[\)]?([\-]| )?)([0-9]|[\-]| ){7,10}$/u;
 
