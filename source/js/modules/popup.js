@@ -5,7 +5,6 @@ const CustomClass = {
   POPUP: `popup`,
   POPUP_INFO: `popup__info`,
   DISABLE_SCROLL: `disable-scroll`,
-  HIDDEN_FORM: `callback-form--hidden`,
 };
 
 let popup = null;
@@ -101,25 +100,32 @@ const getPopupChanger = () => {
       closeButton.addEventListener(`click`, closePopup);
     }
 
-    const showPopup = (newInfoBlock) => {
+    const prepareInfoBlock = (newInfoBlock) => {
       const oldInfoBlock = popupContent.querySelector(`.${CustomClass.POPUP_INFO}`);
 
       newInfoBlock.classList.add(CustomClass.POPUP_INFO);
-      popupCallbackForm.classList.remove(CustomClass.HIDDEN_FORM);
 
       if (oldInfoBlock) {
         oldInfoBlock.replaceWith(newInfoBlock);
       } else {
         popupContent.prepend(newInfoBlock);
       }
+    };
+
+    const showPopup = (newInfoBlock) => {
+      prepareInfoBlock(newInfoBlock);
+
+      newInfoBlock.append(popupCallbackForm);
 
       openPopup(popup);
     };
 
     const showPopupWithoutCallbackForm = (newInfoBlock) => {
-      showPopup(newInfoBlock);
+      prepareInfoBlock(newInfoBlock);
 
-      popupCallbackForm.classList.add(CustomClass.HIDDEN_FORM);
+      popupCallbackForm.remove();
+
+      openPopup(popup);
     };
 
     return {showPopup, showPopupWithoutCallbackForm};
