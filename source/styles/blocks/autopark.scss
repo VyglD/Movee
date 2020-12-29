@@ -124,26 +124,13 @@
 }
 
 .autopark__slide {
-  position: relative;
-  z-index: -1;
+  @include hidden();
 
   grid-row: 1;
   grid-column: 1;
   display: flex;
   flex-direction: column;
   margin: 37px 0 0;
-
-  opacity: 0;
-  visibility: hidden;
-
-  &--active,
-  &--no-js {
-    position: relative;
-    z-index: 1;
-
-    opacity: 1;
-    visibility: visible;
-  }
 
   &--animation {
     &-fadeinLeft {
@@ -161,6 +148,11 @@
     &-fadeOutRight {
       animation: fadeOutRight $duration forwards;
     }
+  }
+
+  &--active,
+  &--no-js {
+    @include visible();
   }
 }
 
@@ -413,9 +405,7 @@
   }
 
   .autopark__slide {
-    &--active {
-      margin: 0;
-    }
+    margin: 0;
   }
 
   .autopark__offer {

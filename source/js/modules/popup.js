@@ -67,24 +67,28 @@ const closePopup = () => {
 
 const openPopup = () => {
   if (popup) {
-    const pagePosition = window.scrollY;
+    // Предотвращает повторное открытие попапа, если он уже открыт
+    if (!document.body.dataset.position) {
+      const pagePosition = window.scrollY;
 
-    document.body.classList.add(CustomClass.DISABLE_SCROLL);
-    document.body.dataset.position = pagePosition;
-    document.body.style.top = `${-1 * pagePosition}px`;
+      document.body.classList.add(CustomClass.DISABLE_SCROLL);
+      document.body.dataset.position = pagePosition;
+      document.body.style.top = `${-1 * pagePosition}px`;
 
-    previousFocusableElement = document.activeElement;
+      previousFocusableElement = document.activeElement;
+
+      popup.classList.add(`popup--opened`);
+      popup.addEventListener(`click`, handleEmpyPlaceClickHandler);
+
+      document.addEventListener(`keydown`, handleEscKeyDown);
+      document.addEventListener(`keydown`, handleFocusElementChange);
+    }
+
     focusableElements = Array.from(popup.querySelectorAll(FOCUS_ELEMENTS));
-
-    popup.classList.add(`popup--opened`);
-    popup.addEventListener(`click`, handleEmpyPlaceClickHandler);
 
     if (focusableElements.length > 0) {
       focusableElements[0].focus();
     }
-
-    document.addEventListener(`keydown`, handleEscKeyDown);
-    document.addEventListener(`keydown`, handleFocusElementChange);
   }
 };
 

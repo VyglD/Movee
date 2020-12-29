@@ -27,10 +27,31 @@ const isEscKeyDown = (evt) => {
   return evt.key === Key.ESC;
 };
 
+const removeClassesWithModificator = (nodes, modificator) => {
+  if (!nodes.length) {
+    nodes = [nodes];
+  }
+
+  nodes.forEach((node) => {
+    if (
+      node.className &&
+      node.className.includes &&
+      node.className.includes(modificator)
+    ) {
+      node.classList.forEach((nodeClass) => {
+        if (nodeClass.includes(modificator)) {
+          node.classList.remove(nodeClass);
+        }
+      });
+    }
+  });
+};
+
 export {
   createElement,
   createOrderButton,
   getNextArrayIndex,
   getPreviousArrayIndex,
   isEscKeyDown,
+  removeClassesWithModificator,
 };
