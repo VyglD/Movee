@@ -8,11 +8,6 @@ import {init as initCallback} from "./modules/callback";
 import {init as initMap} from "./modules/map";
 import {removeClassesWithModificator} from "./modules/utils";
 
-removeClassesWithModificator(
-    Array.from(document.querySelectorAll(`*`)),
-    `--no-js`
-);
-
 Promise.resolve(
     getOffers()
 )
@@ -25,4 +20,10 @@ Promise.resolve(
     initReviews();
     initCallback(showPopupWithoutCallbackForm);
     initMap();
+  })
+  .then(() => {
+    removeClassesWithModificator(
+        Array.from(document.querySelectorAll(`*`)),
+        `--no-js`
+    );
   });

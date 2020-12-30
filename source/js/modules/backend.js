@@ -23,7 +23,7 @@ const toJSON = (response) => {
 };
 
 const load = ({url = ``, method = Method.GET, body = null, headers = new Headers()} = {}) => {
-  return fetch(`/server/${url}`, {method, body, headers})
+  return fetch(`server/${url}`, {method, body, headers})
     .then(checkStatus)
     .catch(catchError);
 };

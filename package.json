@@ -38,6 +38,7 @@
         "gulp-webp": "4.0.1",
         "postcss": "8.1.4",
         "postcss-csso": "5.0.0",
+        "pre-commit": "1.2.2",
         "pug": "3.0.0",
         "pug-lint": "2.6.0",
         "stylelint": "13.3.3",
@@ -47,21 +48,25 @@
         "vinyl-source-stream": "2.0.0",
         "yargs": "16.1.1"
     },
+    "dependencies": {
+        "inputmask": "5.0.5"
+    },
     "scripts": {
         "editorconfig": "editorconfig-cli",
         "stylelint": "stylelint \"source/styles/**/*.{css,scss}\"",
         "start": "gulp start",
         "build": "gulp build --production",
+        "dev": "gulp build",
         "test": "gulp test && npm run stylelint && npm run editorconfig"
     },
+    "pre-commit": [
+      "test"
+    ],
     "editorconfig-cli": [
         "*.json",
         "source/markup/**/*.html",
         "source/js/**/*.js",
         "source/styles/**/*.{css,scss}",
         "source/img/**/*.svg"
-    ],
-    "dependencies": {
-        "inputmask": "5.0.5"
-    }
+    ]
 }
