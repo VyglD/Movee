@@ -8,6 +8,8 @@ import {init as initCallback} from "./modules/callback";
 import {init as initMap} from "./modules/map";
 import {removeClassesWithModificator} from "./modules/utils";
 
+const NO_JS_MODIFICATOR = `--no-js`;
+
 Promise.resolve(
     getOffers()
 )
@@ -23,7 +25,7 @@ Promise.resolve(
   })
   .then(() => {
     removeClassesWithModificator(
-        Array.from(document.querySelectorAll(`*`)),
-        `--no-js`
+        Array.from(document.querySelectorAll(`[class*="${NO_JS_MODIFICATOR}"]`)),
+        NO_JS_MODIFICATOR
     );
   });

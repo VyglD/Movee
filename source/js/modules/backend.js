@@ -1,4 +1,3 @@
-
 const Method = {
   GET: `GET`,
   PUT: `PUT`,
@@ -23,19 +22,21 @@ const toJSON = (response) => {
 };
 
 const load = ({url = ``, method = Method.GET, body = null, headers = new Headers()} = {}) => {
-  return fetch(`server/${url}`, {method, body, headers})
+  return fetch(url, {method, body, headers})
     .then(checkStatus)
     .catch(catchError);
 };
 
 const getOffers = () => {
-  return load()
+  return load({
+    url: `server/offers.json`
+  })
     .then(toJSON);
 };
 
 const postCallbackForm = (data) => {
   return load({
-    url: `callback.php`,
+    url: `server/callback.php`,
     method: Method.POST,
     body: data,
   })

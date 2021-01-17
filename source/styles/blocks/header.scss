@@ -8,6 +8,7 @@ $nav-offset: 16px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  max-width: 100vw;
   padding: 27px $offset $nav-offset;
 
   background-color: var(--color-yellow, yellow);
@@ -266,7 +267,7 @@ $nav-offset: 16px;
 
 @media (min-width: $desktop) {
   .header {
-    padding: 40px calc((50% - #{$desktop} / 2) + #{$offset}) 20px;
+    padding: 40px calc((100vw - #{$desktop}) / 2 + #{$offset}) 20px;
   }
 
   .header__nav-list {

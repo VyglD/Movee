@@ -1,5 +1,6 @@
 .footer {
   display: block;
+  max-width: 100vw;
   padding: $offset $offset 50px;
 
   background-color: var(--color-yellow, yellow);
@@ -126,7 +127,7 @@
 
 @media (min-width: $desktop) {
   .footer {
-    padding: 84px calc((50% - #{$desktop} / 2) + #{$offset}) 101px;
+    padding: 84px calc((100vw - #{$desktop}) / 2 + #{$offset}) 101px;
   }
 
   .footer__blocks {

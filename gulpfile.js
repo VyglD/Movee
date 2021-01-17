@@ -201,14 +201,25 @@ gulp.task(`refresh`, () => {
 });
 
 gulp.task(`server`, () => {
-  server.init({
-    // server: `build/`,
-    // open: true,
-    // cors: true,
-    // ui: false,
-    proxy: `movee.ru`,
+  const config = {
     notify: false,
-  });
+  };
+
+  if (argv.php) {
+    config.proxy = `http://movee/`;
+  } else {
+    Object.assign(
+        config,
+        {
+          server: `build/`,
+          open: true,
+          cors: true,
+          ui: false,
+        }
+    );
+  }
+
+  server.init(config);
 
   gulp.watch(`source/markup/**/*.pug`).on(`all`, gulp.series(`markup`, `refresh`));
   gulp.watch(`source/styles/**/*.scss`).on(`all`, gulp.series(`styles`, `refresh`));

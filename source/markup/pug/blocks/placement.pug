@@ -4,12 +4,14 @@ section(class="placement" id="placement")
   h2(class="visually-hidden").
     Наше расположение
   div(class="placement__map-wrapper")
-    img(
-      src="img/map.png"
-      width="1924"
-      height="666"
-      alt="Расположение нашего оффиса"
-    )
+    picture
+      source(type="image/webp" srcset="img/map.webp")
+      img(
+        src="img/map.png"
+        width="1924"
+        height="666"
+        alt="Расположение нашего оффиса"
+      )
   div(class="placement__info-wrapper")
     img(
       class="placement__logo"

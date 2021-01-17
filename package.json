@@ -55,6 +55,7 @@
         "editorconfig": "editorconfig-cli",
         "stylelint": "stylelint \"source/styles/**/*.{css,scss}\"",
         "start": "gulp start",
+        "watch": "gulp start --php",
         "build": "gulp build --production",
         "dev": "gulp build",
         "test": "gulp test && npm run stylelint && npm run editorconfig"

@@ -28,7 +28,7 @@ const isEscKeyDown = (evt) => {
 };
 
 const removeClassesWithModificator = (nodes, modificator) => {
-  if (!nodes.length) {
+  if (!(length in nodes)) {
     nodes = [nodes];
   }
 
