@@ -6,6 +6,7 @@ import {init as initAutopark} from "./modules/autopark";
 import {init as initReviews} from "./modules/reviews";
 import {init as initCallback} from "./modules/callback";
 import {init as initMap} from "./modules/map";
+import {init as initNav} from "./modules/nav";
 import {removeClassesWithModificator} from "./modules/utils";
 
 const NO_JS_MODIFICATOR = `--no-js`;
@@ -22,6 +23,7 @@ Promise.resolve(
     initReviews();
     initCallback(showPopupWithoutCallbackForm);
     initMap();
+    initNav();
   })
   .then(() => {
     removeClassesWithModificator(

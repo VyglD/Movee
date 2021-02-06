@@ -37,7 +37,7 @@
   }
 
   &--nav {
-    margin-top: 15px;
+    padding-top: 15px;
   }
 
   &--nav,
@@ -85,10 +85,6 @@
   text-decoration: none;
 
   border-color: transparent;
-}
-
-.footer__nav-list {
-  margin-top: 10px;
 }
 
 .footer__social-list {
@@ -161,6 +157,10 @@
 
     &--agreement {
       margin: 37px 0 0;
+    }
+
+    &--nav {
+      padding-top: 15px;
     }
   }
 
