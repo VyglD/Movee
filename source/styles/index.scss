@@ -1,7 +1,8 @@
-@import "variables.scss";
-@import "fonts.scss";
-@import "mixins.scss";
-@import "common.scss";
+@import "config/variables.scss";
+@import "config/fonts.scss";
+@import "config/mixins.scss";
+@import "config/animations.scss";
+@import "config/common.scss";
 @import "blocks/action-button.scss";
 @import "blocks/order-button.scss";
 @import "blocks/call-button.scss";

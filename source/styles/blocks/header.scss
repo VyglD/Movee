@@ -1,5 +1,3 @@
-$nav-offset: 16px;
-
 .header {
   position: relative;
   z-index: 2;
@@ -7,24 +5,11 @@ $nav-offset: 16px;
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
   max-width: 100vw;
-  padding: 27px $offset $nav-offset;
-
-  background-color: var(--color-yellow, yellow);
-}
-
-.header:not(.header--no-js)::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-
-  content: "";
-
-  display: block;
-  width: 100%;
-  height: 65px;
+  min-width: $mobile;
+  padding: 17px 0 0;
 
   background-color: var(--color-yellow, yellow);
 }
@@ -32,6 +17,11 @@ $nav-offset: 16px;
 .header__logo {
   position: relative;
   z-index: 3;
+
+  display: block;
+  width: 62px;
+  height: 13px;
+  margin: 0 1% 0 $offset;
 
   &--no-js {
     margin: 0 auto;
@@ -45,81 +35,96 @@ $nav-offset: 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 22px;
-  width: 44px;
+  height: auto;
+  width: auto;
   margin: 0;
   margin-left: auto;
-  padding: 0;
+  padding: 10px $offset 0 1%;
 
   border: none;
   background-color: transparent;
   outline: none;
+
+  &::before,
+  &::after {
+    content: "";
+  }
+
+  &::before,
+  &::after,
+  & span {
+    display: block;
+    width: 44px;
+    height: 2px;
+    margin-bottom: 8px;
+
+    background-color: var(--color-dark, black);
+  }
+
+  & span {
+    color: transparent;
+    font-size: 0;
+
+    overflow: hidden;
+  }
 
   &--no-js {
     display: none;
   }
 }
 
-.header__nav-toggle::before,
-.header__nav-toggle::after {
-  content: "";
+.header__nav-toggle:not(:disabled) {
+  &:focus {
+    &::before,
+    &::after,
+    & span {
+      box-shadow: 2px 2px 2px 1px var(--color-gray-2, gray);
+    }
+  }
+
+  &:hover {
+    &::before,
+    &::after,
+    & span {
+      box-shadow: 2px 2px 2px 1px var(--color-gray, gray);
+    }
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
 }
 
-.header__nav-toggle::before,
-.header__nav-toggle::after,
-.header__nav-toggle span {
+.header__nav {
+  flex-grow: 1;
   display: block;
   width: 100%;
-  height: 2px;
-
-  background-color: var(--color-dark, black);
-}
-
-.header__nav-toggle span {
-  color: transparent;
-  font-size: 0;
+  margin-top: 8px;
 
   overflow: hidden;
 }
 
-.header__nav-toggle:focus {
-  &::before,
-  &::after,
-  & span {
-    box-shadow: 2px 2px 2px 1px var(--color-gray-2, gray);
-  }
-}
-
-.header__nav-toggle:hover {
-  &::before,
-  &::after,
-  & span {
-    box-shadow: 2px 2px 2px 1px var(--color-gray, gray);
-  }
-}
-
-.header__nav-toggle:active {
-  opacity: 0.5;
-}
-
-.header__nav {
+.header__nav-list {
   display: flex;
-  flex-grow: 1;
+  flex-direction: column;
   flex-wrap: wrap;
-  width: 100%;
   margin-top: -100%;
-  margin-bottom: -#{$nav-offset};
-  margin-left: -#{$offset};
-  margin-right: -#{$offset};
 
   visibility: hidden;
 
+  &--no-js {
+    margin-top: 0;
+
+    visibility: visible;
+  }
+
   &--opened {
-    margin-top: $nav-offset;
+    margin-top: 0;
 
     visibility: visible;
 
-    transition: margin-top $duration;
+    transition: margin 0.35s ease;
+    transition-delay: 0s;
   }
 
   &--closed {
@@ -127,20 +132,8 @@ $nav-offset: 16px;
 
     visibility: hidden;
 
-    transition: margin-top $duration;
+    transition: margin 0.7s ease;
   }
-
-  &--no-js {
-    margin-top: $nav-offset;
-
-    visibility: visible;
-  }
-}
-
-.header__nav-list {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
 }
 
 .header__nav-item {
@@ -174,23 +167,27 @@ $nav-offset: 16px;
   outline: none;
 }
 
-.header__nav-link:hover,
-.header__nav-link:focus {
-  color: var(--color-white, white);
+.header__nav-link:not(:disabled) {
+  &:hover,
+  &:focus {
+    color: var(--color-white, white);
 
-  background-color: var(--color-yellow-2, lightgray);
-}
+    background-color: var(--color-yellow-2, lightgray);
+  }
 
-.header__nav-link:hover {
-  text-decoration: underline;
-}
+  &:hover {
+    text-decoration: underline;
+  }
 
-.header__nav-link:active {
-  opacity: 0.3;
+  &:active {
+    opacity: 0.3;
+  }
 }
 
 .header__telephone {
   display: none;
+  margin: 0;
+  margin-left: 1%;
 }
 
 @media (min-width: $tablet) {
@@ -207,6 +204,7 @@ $nav-offset: 16px;
   .header__logo {
     width: 115px;
     height: 37px;
+    margin-left: 0;
   }
 
   .header__nav-toggle {
@@ -216,8 +214,25 @@ $nav-offset: 16px;
   .header__nav {
     width: auto;
     margin: 0;
+  }
+
+  .header__nav-list {
+    flex-direction: row;
+    justify-content: center;
+    margin: 0;
 
     visibility: visible;
+
+    &--opended,
+    &--closed {
+      margin-top: 0;
+
+      transition: none;
+    }
+  }
+
+  .header__nav-item {
+    width: auto;
   }
 
   .header__nav-item:first-child::before,
@@ -225,17 +240,11 @@ $nav-offset: 16px;
     content: none;
   }
 
-  .header__nav-list {
-    justify-content: center;
-  }
-
-  .header__nav-item {
-    width: auto;
-  }
-
-  .header__nav-link:hover,
-  .header__nav-link:focus {
-    background-color: var(--color-yellow, yellow);
+  .header__nav-link:not(:disabled) {
+    &:hover,
+    &:focus {
+      background-color: transparent;
+    }
   }
 
   .header__telephone {
@@ -251,35 +260,33 @@ $nav-offset: 16px;
     outline: none;
   }
 
-  .header__telephone:focus {
-    color: var(--color-white, white);
-  }
+  .header__telephone:not(:disabled) {
+    &:focus {
+      color: var(--color-white, white);
+    }
 
-  .header__telephone:hover {
-    color: var(--color-white, white);
-    text-decoration: none;
-  }
+    &:hover {
+      color: var(--color-white, white);
+      text-decoration: none;
+    }
 
-  .header__telephone:active {
-    opacity: 0.3;
+    &:active {
+      opacity: 0.3;
+    }
   }
 }
 
 @media (min-width: $desktop) {
   .header {
-    padding: 40px calc((100vw - #{$desktop}) / 2 + #{$offset}) 20px;
+    padding: 22px calc((50% - #{$desktop} / 2) + #{$offset}) 3px;
   }
 
-  .header__nav-list {
-    margin-left: 50px;
-  }
-
-  .header__nav-item {
-    margin-right: 50px;
+  .header__nav {
+    margin: 0 25px;
   }
 
   .header__nav-link {
-    padding: 0;
+    padding: 25px;
   }
 
   .header__telephone {

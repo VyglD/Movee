@@ -13,19 +13,21 @@ $border-size: 2px;
   );
 }
 
-.action-button:not(:disabled):hover span,
-.action-button:not(:disabled):focus span {
-  color: var(--color-dark, black);
+.action-button:not(:disabled) {
+  &:hover span,
+  &:focus span {
+    color: var(--color-dark, black);
 
-  box-shadow: inset 0 0 0 2px var(--color-white, white);
-}
+    box-shadow: inset 0 0 0 2px var(--color-white, white);
+  }
 
-.action-button:not(:disabled):hover span {
-  text-decoration: underline;
-}
+  &:hover span {
+    text-decoration: underline;
+  }
 
-.action-button:not(:disabled):active {
-  filter: contrast(0.4);
+  &:active {
+    filter: contrast(0.4);
+  }
 }
 
 .action-button:disabled {
@@ -64,17 +66,19 @@ $border-size: 2px;
     transition: all $duration;
   }
 
-  .action-button:not(:disabled):hover::before,
-  .action-button:not(:disabled):focus::before {
-    top: #{-$border-size};
-    left: #{-$border-size};
+  .action-button:not(:disabled) {
+    &:hover::before,
+    &:focus::before {
+      top: #{-$border-size};
+      left: #{-$border-size};
 
-    width: calc(100% + 2 * #{$border-size});
-    height: calc(100% + 2 * #{$border-size});
-  }
+      width: calc(100% + 2 * #{$border-size});
+      height: calc(100% + 2 * #{$border-size});
+    }
 
-  .action-button:not(:disabled):hover span,
-  .action-button:not(:disabled):focus span {
-    box-shadow: none;
+    &:hover span,
+    &:focus span {
+      box-shadow: none;
+    }
   }
 }

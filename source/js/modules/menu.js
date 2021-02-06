@@ -1,6 +1,6 @@
 const CustomClass = {
-  OPENED: `header__nav--opened`,
-  CLOSED: `header__nav--closed`,
+  OPENED: `header__nav-list--opened`,
+  CLOSED: `header__nav-list--closed`,
 };
 
 const init = () => {

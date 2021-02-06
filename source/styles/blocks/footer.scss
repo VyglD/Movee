@@ -93,12 +93,13 @@
 
 .footer__social-list {
   --social-item-color-stroke: var(--color-white, white);
+  --social-item-offset: 25px;
 
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
-  max-width: 165px;
+  max-width: 190px;
   margin: 46px auto 0;
 }
 
@@ -127,7 +128,7 @@
 
 @media (min-width: $desktop) {
   .footer {
-    padding: 84px calc((100vw - #{$desktop}) / 2 + #{$offset}) 101px;
+    padding: 84px calc((50% - #{$desktop} / 2) + #{$offset}) 101px;
   }
 
   .footer__blocks {

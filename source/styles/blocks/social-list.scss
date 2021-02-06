@@ -8,10 +8,7 @@ $social-stroke-width: 1px;
 
   display: flex;
   flex-wrap: wrap;
-}
-
-.social-list__item {
-  margin-left: var(--social-item-offset);
+  margin-right: -13px;
 }
 
 .social-list__link {
@@ -20,12 +17,29 @@ $social-stroke-width: 1px;
   display: block;
   width: $social-size;
   height: $social-size;
+  padding: 0 calc(var(--social-item-offset) / 2);
 
   background-position: bottom;
+  background-repeat: no-repeat;
   background-size: $social-size;
   outline: none;
 
   transition: background-position $duration;
+
+  &::before {
+    content: none;
+
+    position: absolute;
+    left: #{($social-size - $social-stroke-size) / 2 - $social-stroke-width};
+    top: #{($social-size - $social-stroke-size) / 2 - $social-stroke-width};
+
+    display: block;
+    width: $social-stroke-size;
+    height: $social-stroke-size;
+
+    border: $social-stroke-width solid var(--social-item-color-stroke);
+    border-radius: 5px;
+  }
 
   &--youtube {
     background-image: url("../img/youtube-icon.svg");
@@ -44,34 +58,21 @@ $social-stroke-width: 1px;
   }
 }
 
-.social-list__link::before {
-  content: none;
+.social-list__link:not(:disabled) {
+  &:hover,
+  &:focus {
+    background-position: top;
+  }
 
-  position: absolute;
-  left: #{($social-size - $social-stroke-size) / 2 - $social-stroke-width};
-  top: #{($social-size - $social-stroke-size) / 2 - $social-stroke-width};
+  &:focus::before {
+    content: "";
+  }
 
-  display: block;
-  width: $social-stroke-size;
-  height: $social-stroke-size;
+  &:hover::before {
+    content: none;
+  }
 
-  border: $social-stroke-width solid var(--social-item-color-stroke);
-  border-radius: 5px;
-}
-
-.social-list__link:hover,
-.social-list__link:focus {
-  background-position: top;
-}
-
-.social-list__link:focus::before {
-  content: "";
-}
-
-.social-list__link:hover::before {
-  content: none;
-}
-
-.social-list__link:active {
-  opacity: 0.5;
+  &:active {
+    opacity: 0.5;
+  }
 }

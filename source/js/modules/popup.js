@@ -40,7 +40,7 @@ const handleFocusElementChange = (evt) => {
   }
 };
 
-const handleEmpyPlaceClickHandler = (evt) => {
+const handleEmptyPlaceClickHandler = (evt) => {
   if (evt.target.classList.contains(CustomClass.POPUP)) {
     closePopup();
   }
@@ -56,7 +56,7 @@ const closePopup = () => {
     window.scroll({top: pagePosition, left: 0});
 
     popup.classList.remove(`popup--opened`);
-    popup.removeEventListener(`click`, handleEmpyPlaceClickHandler);
+    popup.removeEventListener(`click`, handleEmptyPlaceClickHandler);
 
     previousFocusableElement.focus();
 
@@ -78,7 +78,7 @@ const openPopup = () => {
       previousFocusableElement = document.activeElement;
 
       popup.classList.add(`popup--opened`);
-      popup.addEventListener(`click`, handleEmpyPlaceClickHandler);
+      popup.addEventListener(`click`, handleEmptyPlaceClickHandler);
 
       document.addEventListener(`keydown`, handleEscKeyDown);
       document.addEventListener(`keydown`, handleFocusElementChange);

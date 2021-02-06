@@ -50,7 +50,10 @@ const formattedPictures = (paths) => {
   const method = argv.production ? 6 : 0;
 
   return gulp.src(paths, {base: `source/`})
-    .pipe(webp({method}))
+    .pipe(webp({
+      method,
+      quality: 100,
+    }))
     .pipe(gulp.dest(`build/`));
 };
 
